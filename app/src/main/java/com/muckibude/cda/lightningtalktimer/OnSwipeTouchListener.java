@@ -8,9 +8,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 
-/**
- * Created by cda on 26.07.16.
- */
 public abstract class OnSwipeTouchListener implements OnTouchListener {
 
     private static final String TAG = "OnSwipeTouchListener";
