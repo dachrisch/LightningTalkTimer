@@ -1,4 +1,4 @@
-package com.muckibude.cda.lightningtalktimer;
+package com.muckibude.cda.lightningtalktimer.gestures;
 
 import android.content.Context;
 import android.util.Log;
