@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.muckibude.cda.lightningtalktimer.R;
@@ -61,8 +62,10 @@ public class BackCountdownDisplayFragment extends Fragment {
             public void onClick(View view) {
                 if (countDownTimer.isRunning()) {
                     countDownTimer.pause();
+                    ((ImageView) view.findViewById(R.id.pauseButton)).setImageResource(R.drawable.play_overlay_icon);
                 } else {
                     countDownTimer.resume();
+                    ((ImageView) view.findViewById(R.id.pauseButton)).setImageResource(R.drawable.pause_overlay);
                 }
             }
         });
