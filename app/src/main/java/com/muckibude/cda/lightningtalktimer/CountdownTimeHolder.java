@@ -11,7 +11,7 @@ public class CountdownTimeHolder {
     private int minutes;
     private static final String TAG = "CountdownTimeHolder";
 
-    CountdownTimeHolder(TextView minutesView, TextView secondsView) {
+    public CountdownTimeHolder(TextView minutesView, TextView secondsView) {
         this.secondsView = secondsView;
         this.minutesView = minutesView;
 
