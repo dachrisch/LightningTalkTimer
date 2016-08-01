@@ -6,14 +6,15 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:textSize="500sp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="-60dp"
+        android:textSize="@dimen/countdown_big_text_size"
         android:id="@+id/big_number_text_view"
         android:textColor="#ffffff"
         android:text="2"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/small_number_text_view"/>
+        android:layout_above="@+id/small_number_text_view"
+        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -24,5 +25,13 @@
         android:layout_gravity="center|bottom"
         android:textColor="#ffffff"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"/>
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/pauseButton"
+        android:src="@drawable/pause_overlay"
+        android:layout_marginBottom="67dp"/>
 </RelativeLayout>

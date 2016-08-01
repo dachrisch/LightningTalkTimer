@@ -2,7 +2,6 @@ package com.muckibude.cda.lightningtalktimer.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,12 +10,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.muckibude.cda.lightningtalktimer.R;
+import com.muckibude.cda.lightningtalktimer.countdown.PauseableCountdownTimer;
 
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public class BackCountdownDisplayFragment extends Fragment {
     private static final String TAG = "BackCountdownDisplay";
+    private PauseableCountdownTimer countDownTimer;
 
     @Nullable
     @Override
@@ -36,8 +37,12 @@ public class BackCountdownDisplayFragment extends Fragment {
 
         int initialMinutes = getArguments().getInt("minutes");
         int initialSeconds = getArguments().getInt("seconds");
-        final int countdownTime = initialMinutes * 60 + initialSeconds;
-        new CountDownTimer(countdownTime * 1000, 1000) {
+        countDownTimer = new PauseableCountdownTimer((initialMinutes * 60 + initialSeconds) * 1000, 1000) {
+            @Override
+            public void onFinish() {
+                Log.d(TAG, "finished");
+            }
+
             @Override
             public void onTick(long millisUntilFinished) {
                 long remainingMinutes = TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished);
@@ -47,10 +52,19 @@ public class BackCountdownDisplayFragment extends Fragment {
                 Log.d(TAG, String.format(Locale.getDefault(), "remaining time %d:%02d", remainingMinutes, remainingSeconds));
             }
 
+        };
+        countDownTimer.start();
+
+        view.findViewById(R.id.pauseButton).setOnClickListener(new View.OnClickListener() {
+
             @Override
-            public void onFinish() {
-                Log.d(TAG, "timer finished");
+            public void onClick(View view) {
+                if (countDownTimer.isRunning()) {
+                    countDownTimer.pause();
+                } else {
+                    countDownTimer.resume();
+                }
             }
-        }.start();
+        });
     }
 }

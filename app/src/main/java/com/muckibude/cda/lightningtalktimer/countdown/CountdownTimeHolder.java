@@ -1,4 +1,4 @@
-package com.muckibude.cda.lightningtalktimer;
+package com.muckibude.cda.lightningtalktimer.countdown;
 
 import android.util.Log;
 import android.widget.TextView;

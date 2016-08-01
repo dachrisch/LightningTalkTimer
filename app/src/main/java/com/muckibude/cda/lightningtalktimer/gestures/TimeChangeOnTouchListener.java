@@ -4,7 +4,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.muckibude.cda.lightningtalktimer.CountdownTimeHolder;
+import com.muckibude.cda.lightningtalktimer.countdown.CountdownTimeHolder;
 
 /**
  * TimeChangeOnTouchListener
