@@ -1,7 +1,7 @@
 package com.muckibude.cda.lightningtalktimer.injection;
 
-import com.muckibude.cda.lightningtalktimer.ui.BackFragment;
-import com.muckibude.cda.lightningtalktimer.ui.FrontFragment;
+import com.muckibude.cda.lightningtalktimer.ui.BackCountdownDisplayFragment;
+import com.muckibude.cda.lightningtalktimer.ui.FrontCountdownSelectFragment;
 
 import javax.inject.Singleton;
 
@@ -12,7 +12,7 @@ import dagger.Component;
 })
 @Singleton
 public interface TimerComponent {
-    FrontFragment inject(FrontFragment frontFragment);
+    FrontCountdownSelectFragment inject(FrontCountdownSelectFragment frontCountdownSelectFragment);
 
-    BackFragment inject(BackFragment backFragment);
+    BackCountdownDisplayFragment inject(BackCountdownDisplayFragment backCountdownDisplayFragment);
 }

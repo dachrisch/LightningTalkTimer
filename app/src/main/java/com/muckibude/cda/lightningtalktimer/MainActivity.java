@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
-import com.muckibude.cda.lightningtalktimer.ui.FrontFragment;
+import com.muckibude.cda.lightningtalktimer.ui.FrontCountdownSelectFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             getFragmentManager()
                     .beginTransaction()
-                    .add(R.id.container, new FrontFragment())
+                    .add(R.id.container, new FrontCountdownSelectFragment())
                     .commit();
         }
     }

@@ -19,7 +19,7 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
-public class FrontFragment extends Fragment implements FrontView {
+public class FrontCountdownSelectFragment extends Fragment implements FrontView {
 
     @Inject
     FrontPresenter frontPresenter;
@@ -71,7 +71,7 @@ public class FrontFragment extends Fragment implements FrontView {
                         // Replace any fragments currently in the container view with a
                         // fragment representing the next page (indicated by the
                         // just-incremented currentPage variable).
-                        .replace(R.id.container, new BackFragment())
+                        .replace(R.id.container, new BackCountdownDisplayFragment())
 
                         // Add this transaction to the back stack, allowing users to press
                         // Back to get to the front of the card.

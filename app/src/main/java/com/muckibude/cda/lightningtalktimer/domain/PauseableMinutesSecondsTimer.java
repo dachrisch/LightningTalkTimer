@@ -23,14 +23,6 @@ public class PauseableMinutesSecondsTimer {
 
     }
 
-    public void setMinutes(int minutes) {
-        this.minutes = minutes;
-    }
-
-    public void setSeconds(int seconds) {
-        this.seconds = seconds;
-    }
-
     private PauseableMinutesSecondsTimer start() {
         countDownTimer = new CountDownTimer(inMillis(), 1000) {
             @Override
@@ -51,6 +43,14 @@ public class PauseableMinutesSecondsTimer {
         }.start();
         isRunning = true;
         return this;
+    }
+
+    public void setMinutes(int minutes) {
+        this.minutes = minutes;
+    }
+
+    public void setSeconds(int seconds) {
+        this.seconds = seconds;
     }
 
     private long inMillis() {

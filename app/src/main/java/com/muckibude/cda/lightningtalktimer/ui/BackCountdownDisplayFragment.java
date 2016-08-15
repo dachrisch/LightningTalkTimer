@@ -19,8 +19,8 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
-public class BackFragment extends Fragment implements BackView {
-    private static final String TAG = "BackFragment";
+public class BackCountdownDisplayFragment extends Fragment implements BackView {
+    private static final String TAG = "BackCountdownDisplay";
 
     @Inject
     BackPresenter backPresenter;
