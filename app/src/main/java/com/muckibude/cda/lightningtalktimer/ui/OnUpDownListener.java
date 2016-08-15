@@ -7,7 +7,7 @@ import android.view.View;
 import com.muckibude.cda.lightningtalktimer.presentation.FrontPresenter;
 
 /**
- * TimeChangeOnTouchListener
+ * OnUpDownListener
  * listens for touch movements and changes the countdown timer up or down by 15 seconds with every movement
  * Created by cda on 27.07.16.
  */

@@ -31,5 +31,6 @@ public class FrontPresenter implements Presenter<FrontView> {
     @Override
     public void setView(FrontView view) {
         this.frontView = view;
+        updateDisplay();
     }
 }

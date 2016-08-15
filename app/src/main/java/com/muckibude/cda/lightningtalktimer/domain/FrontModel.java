@@ -6,7 +6,7 @@ import javax.inject.Inject;
 
 public class FrontModel {
 
-    private MinutesSecondsEntity minutesSecondsEntity;
+    private final MinutesSecondsEntity minutesSecondsEntity;
 
     @Inject
     public FrontModel(MinutesSecondsEntity minutesSecondsEntity) {
