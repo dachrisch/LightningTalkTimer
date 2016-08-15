@@ -19,11 +19,7 @@ public class PauseableMinutesSecondsTimer {
 
     private boolean isRunning = false;
 
-    private PauseableMinutesSecondsTimer() {
-
-    }
-
-    private PauseableMinutesSecondsTimer start() {
+    public PauseableMinutesSecondsTimer start() {
         countDownTimer = new CountDownTimer(inMillis(), 1000) {
             @Override
             public void onTick(long l) {
@@ -119,22 +115,6 @@ public class PauseableMinutesSecondsTimer {
             return this;
         }
 
-        public CountDownBuilder doOnFinish(OnFinishCallback onFinishCallback) {
-            pauseableMinutesSecondsTimer.setOnFinishCallback(onFinishCallback);
-            return new CountDownBuilder(pauseableMinutesSecondsTimer);
-        }
     }
 
-    public static class CountDownBuilder {
-
-        private final PauseableMinutesSecondsTimer pauseableMinutesSecondsTimer;
-
-        public CountDownBuilder(PauseableMinutesSecondsTimer pauseableMinutesSecondsTimer) {
-            this.pauseableMinutesSecondsTimer = pauseableMinutesSecondsTimer;
-        }
-
-        public PauseableMinutesSecondsTimer start() {
-            return pauseableMinutesSecondsTimer.start();
-        }
-    }
 }

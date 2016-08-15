@@ -13,7 +13,6 @@ public class BackModel {
         this.minutesSecondsEntity = minutesSecondsEntity;
     }
 
-
     public int getMinutes() {
         return minutesSecondsEntity.getMinutes();
     }
@@ -26,3 +25,4 @@ public class BackModel {
         minutesSecondsEntity.decrementSeconds(1);
     }
 }
+

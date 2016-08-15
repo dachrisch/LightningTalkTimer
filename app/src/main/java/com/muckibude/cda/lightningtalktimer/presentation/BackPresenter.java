@@ -3,21 +3,38 @@ package com.muckibude.cda.lightningtalktimer.presentation;
 import android.util.Log;
 
 import com.muckibude.cda.lightningtalktimer.domain.BackModel;
+import com.muckibude.cda.lightningtalktimer.domain.CountDownBuilder;
 import com.muckibude.cda.lightningtalktimer.domain.PauseableMinutesSecondsTimer;
 
 import javax.inject.Inject;
 
-public class BackPresenter implements Presenter<BackView> {
+public class BackPresenter implements Presenter<BackView>, PauseableMinutesSecondsTimer.OnSecondCallback, PauseableMinutesSecondsTimer.OnFinishCallback {
     private static final String TAG = "BackPresenter";
-    private BackView backView;
     private final BackModel backModel;
+    private BackView backView;
     private PauseableMinutesSecondsTimer pauseableMinutesSecondsTimer;
 
+    private final CountDownBuilder countDownBuilder;
+
     @Inject
-    public BackPresenter(BackModel backModel) {
+    public BackPresenter(final BackModel backModel) {
         this.backModel = backModel;
+        countDownBuilder = new CountDownBuilder(this);
     }
 
+    @Override
+    public void onSecond() {
+        Log.d(TAG, "decrement one second");
+        backModel.decrementOneSecond();
+        backView.display(backModel.getMinutes(), backModel.getSeconds());
+    }
+
+    @Override
+    public void onFinish() {
+        Log.d(TAG, "finished");
+        backModel.decrementOneSecond();
+        backView.display(backModel.getMinutes(), backModel.getSeconds());
+    }
     @Override
     public void setView(BackView view) {
         backView = view;
@@ -25,19 +42,8 @@ public class BackPresenter implements Presenter<BackView> {
 
     public void startTimer() {
         Log.d(TAG, "start timer");
-        pauseableMinutesSecondsTimer = PauseableMinutesSecondsTimer.doEverySecond(new PauseableMinutesSecondsTimer.OnSecondCallback() {
-            @Override
-            public void onSecond() {
-                Log.d(TAG, "decrement");
-                backModel.decrementOneSecond();
-                backView.display(backModel.getMinutes(), backModel.getSeconds());
-            }
-        }).startAt(backModel.getMinutes(), backModel.getSeconds()).doOnFinish(new PauseableMinutesSecondsTimer.OnFinishCallback() {
-            @Override
-            public void onFinish() {
+        pauseableMinutesSecondsTimer = countDownBuilder.start(backModel.getMinutes(), backModel.getSeconds());
 
-            }
-        }).start();
     }
 
     public void toggleTimer() {

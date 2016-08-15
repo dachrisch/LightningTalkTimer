@@ -49,4 +49,9 @@ public class BackCountdownDisplayTest {
         onView(withId(R.id.pauseButton)).check(matches(withDrawable(R.drawable.play_overlay_icon)));
     }
 
+    @Test
+    public void whenLastMinuteCountdownItWillBeShownInBigNumbers() {
+
+    }
+
 }
