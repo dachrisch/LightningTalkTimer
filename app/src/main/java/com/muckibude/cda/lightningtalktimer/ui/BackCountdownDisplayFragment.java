@@ -73,6 +73,12 @@ public class BackCountdownDisplayFragment extends Fragment implements BackView {
     }
 
     @Override
+    public void display(int seconds) {
+        smallNumberView.setVisibility(View.INVISIBLE);
+        bigNumberView.setText(String.format(Locale.getDefault(), "%d", seconds));
+    }
+
+    @Override
     public void pause() {
         pauseButton.setImageResource(R.drawable.play_overlay_icon);
     }
@@ -81,4 +87,5 @@ public class BackCountdownDisplayFragment extends Fragment implements BackView {
     public void resume() {
         pauseButton.setImageResource(R.drawable.pause_overlay);
     }
+
 }

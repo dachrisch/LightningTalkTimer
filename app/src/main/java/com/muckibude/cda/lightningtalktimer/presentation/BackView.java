@@ -6,4 +6,6 @@ public interface BackView {
     void pause();
 
     void resume();
+
+    void display(int seconds);
 }

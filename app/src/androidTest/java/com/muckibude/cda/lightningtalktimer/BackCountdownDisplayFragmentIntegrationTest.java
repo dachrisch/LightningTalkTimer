@@ -17,7 +17,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.muckibude.cda.lightningtalktimer.matcher.ImageResourceMatcher.withDrawable;
 
 @RunWith(AndroidJUnit4.class)
-public class BackCountdownDisplayTest {
+public class BackCountdownDisplayFragmentIntegrationTest {
     @Rule
     public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
             MainActivity.class);
@@ -47,11 +47,6 @@ public class BackCountdownDisplayTest {
         onView(withId(R.id.pauseButton)).check(matches(withDrawable(R.drawable.pause_overlay)));
         onView(withId(R.id.pauseButton)).perform(click());
         onView(withId(R.id.pauseButton)).check(matches(withDrawable(R.drawable.play_overlay_icon)));
-    }
-
-    @Test
-    public void whenLastMinuteCountdownItWillBeShownInBigNumbers() {
-
     }
 
 }
