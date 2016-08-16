@@ -19,14 +19,21 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class BackCountdownDisplayFragment extends Fragment implements BackView {
     private static final String TAG = "BackCountdownDisplay";
 
     @Inject
     BackPresenter backPresenter;
-    private TextView bigNumberView;
-    private TextView smallNumberView;
-    private ImageView pauseButton;
+    @BindView(R.id.big_number_text_view)
+    TextView bigNumberView;
+    @BindView(R.id.small_number_text_view)
+    TextView smallNumberView;
+    @BindView(R.id.pauseButton)
+    ImageView pauseButton;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,19 +51,17 @@ public class BackCountdownDisplayFragment extends Fragment implements BackView {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ButterKnife.bind(this, view);
         backPresenter.setView(this);
-        bigNumberView = (TextView) view.findViewById(R.id.big_number_text_view);
         // http://stackoverflow.com/questions/6253528/font-size-too-large-to-fit-in-cache
         bigNumberView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-        smallNumberView = (TextView) view.findViewById(R.id.small_number_text_view);
-        pauseButton = (ImageView) view.findViewById(R.id.pauseButton);
-        pauseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                backPresenter.toggleTimer();
-            }
-        });
+
         backPresenter.startTimer();
+    }
+
+    @OnClick(R.id.pauseButton)
+    public void toggleTimer() {
+        backPresenter.toggleTimer();
     }
 
     @Override
