@@ -14,11 +14,12 @@ public class FrontModel {
     }
 
     public void increase15Seconds() {
-        this.minutesSecondsEntity.incrementSeconds(15);
+
+        this.minutesSecondsEntity.incrementSeconds(15 - minutesSecondsEntity.getSeconds() % 15);
     }
 
     public void decrease15Seconds() {
-        this.minutesSecondsEntity.decrementSeconds(15);
+        this.minutesSecondsEntity.decrementSeconds(1 + (minutesSecondsEntity.getSeconds() - 1) % 15);
     }
 
     public MinutesSecondsEntity getMinutesSecondsEntity() {
