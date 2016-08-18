@@ -79,6 +79,13 @@ public class BackCountdownDisplayFragment extends Fragment implements BackView {
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        backPresenter.stopTimer();
+        backPresenter.setView(null);
+    }
+
+    @Override
     public void pause() {
         pauseButton.setImageResource(R.drawable.play_overlay_icon);
     }

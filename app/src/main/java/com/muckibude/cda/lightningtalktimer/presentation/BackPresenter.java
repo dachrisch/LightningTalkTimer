@@ -63,4 +63,8 @@ public class BackPresenter implements Presenter<BackView>, PauseableMinutesSecon
             }
         }
     }
+
+    public void stopTimer() {
+        pauseableMinutesSecondsTimer.cancel();
+    }
 }

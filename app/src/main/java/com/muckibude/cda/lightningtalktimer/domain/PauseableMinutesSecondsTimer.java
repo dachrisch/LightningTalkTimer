@@ -74,6 +74,10 @@ public class PauseableMinutesSecondsTimer {
         return new TimeBuilder(doEverySecond);
     }
 
+    public void cancel() {
+        pause();
+    }
+
     public interface OnSecondCallback {
         void onSecond();
     }

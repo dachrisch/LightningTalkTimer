@@ -14,6 +14,12 @@ android {
         versionName "1.0"
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
+
+    sourceSets {
+        androidTest.java.srcDirs = ['src/androidTest/java', ]
+        test.java.srcDirs = ['src/test/java', ]
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -47,5 +53,7 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.1.0'
     apt 'com.jakewharton:butterknife-compiler:8.1.0'
 
+    // https://github.com/grantland/android-autofittextview
+    compile 'me.grantland:autofittextview:0.2.+'
 
 }
