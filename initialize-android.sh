@@ -7,7 +7,7 @@ set -e
 INITIALIZATION_FILE="$ANDROID_HOME/.initialized-dependencies-$(git log -n 1 --format=%h -- $0)"
 
 if [ ! -e ${INITIALIZATION_FILE} ]; then
-  echo "fetch and initialize $ANDROID_HOME"
+  echo "Fetch and initialize $ANDROID_HOME"
   download-android
 
   echo -n "Use the final android sdk tools..."
@@ -15,25 +15,26 @@ if [ ! -e ${INITIALIZATION_FILE} ]; then
   echo y | android update sdk --no-ui --filter tool > /dev/null
   echo "done."
 
-  echo -n "The BuildTools version used by your project..."
-  echo y | android update sdk --no-ui --filter build-tools-24.0.1 --all > /dev/null
+  echo -n "Update build tools to 24..."
+  echo y | android update sdk --no-ui --filter build-tools-23.0.1 --all > /dev/null
   echo "done."
 
-  # The SDK version used to compile your project
-  echo y | android update sdk --no-ui --filter android-24 > /dev/null
+  echo -n "Update SDK to 24"
+  echo y | android update sdk --no-ui --filter android-23 > /dev/null
+  echo "done."
 
   # uncomment to install the Extra/Android Support Library
   # echo y | android update sdk --no-ui --filter extra-android-support --all > /dev/null
 
-  echo -n "install repositories..."
+  echo -n "Install repositories..."
   # uncomment these if you are using maven/gradle to build your android project
   echo y | android update sdk --no-ui --filter extra-google-m2repository --all > /dev/null
   echo y | android update sdk --no-ui --filter extra-android-m2repository --all > /dev/null
   echo "done."
 
-  echo -n "install emulator..."
+  echo -n "Install emulator..."
   # Specify at least one system image if you want to run emulator tests
-  echo y | android update sdk --no-ui --filter sys-img-armeabi-v7a-android-24 --all > /dev/null
+  echo y | android update sdk --no-ui --filter sys-img-armeabi-v7a-android-23 --all > /dev/null
   echo "done."
 
   touch ${INITIALIZATION_FILE}
