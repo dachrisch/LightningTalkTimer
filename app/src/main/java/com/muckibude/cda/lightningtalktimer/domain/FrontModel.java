@@ -1,28 +1,31 @@
 package com.muckibude.cda.lightningtalktimer.domain;
 
-import com.muckibude.cda.lightningtalktimer.data.MinutesSecondsEntity;
+import com.muckibude.cda.lightningtalktimer.data.CountdownEntity;
 
 import javax.inject.Inject;
 
 public class FrontModel {
 
-    private final MinutesSecondsEntity minutesSecondsEntity;
+    private final CountdownEntity countdownEntity;
 
     @Inject
-    public FrontModel(MinutesSecondsEntity minutesSecondsEntity) {
-        this.minutesSecondsEntity = minutesSecondsEntity;
+    public FrontModel(CountdownEntity minutesSecondsEntity) {
+        this.countdownEntity = minutesSecondsEntity;
     }
 
     public void increase15Seconds() {
-
-        this.minutesSecondsEntity.incrementSeconds(15 - minutesSecondsEntity.getSeconds() % 15);
+        this.countdownEntity.incrementSeconds(15 - countdownEntity.getSeconds() % 15);
     }
 
     public void decrease15Seconds() {
-        this.minutesSecondsEntity.decrementSeconds(1 + (minutesSecondsEntity.getSeconds() - 1) % 15);
+        if (0 == countdownEntity.getSeconds() % 15) {
+            countdownEntity.decrementSeconds(15);
+        } else {
+            this.countdownEntity.decrementSeconds(countdownEntity.getSeconds() % 15);
+        }
     }
 
-    public MinutesSecondsEntity getMinutesSecondsEntity() {
-        return minutesSecondsEntity;
+    public CountdownEntity getCountdownEntity() {
+        return countdownEntity;
     }
 }

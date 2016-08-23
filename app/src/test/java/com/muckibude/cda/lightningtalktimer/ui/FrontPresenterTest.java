@@ -1,6 +1,7 @@
 package com.muckibude.cda.lightningtalktimer.ui;
 
-import com.muckibude.cda.lightningtalktimer.data.MinutesSecondsEntity;
+import com.muckibude.cda.lightningtalktimer.data.CountdownEntity;
+import com.muckibude.cda.lightningtalktimer.domain.BackModel;
 import com.muckibude.cda.lightningtalktimer.domain.FrontModel;
 import com.muckibude.cda.lightningtalktimer.presentation.FrontPresenter;
 import com.muckibude.cda.lightningtalktimer.presentation.FrontView;
@@ -30,10 +31,24 @@ public class FrontPresenterTest {
         assertThat(decrementSeconds(14), is(0));
     }
 
+    @Test
+    public void whenDecreasing60SecondsNextMinuteWillBeDecreased() {
+        FrontView view = mock(FrontView.class);
+        CountdownEntity secondsEntity = new CountdownEntity(2, 15);
+        FrontPresenter presenter = new FrontPresenter(new FrontModel(secondsEntity), new BackModel(secondsEntity));
+        presenter.setView(view);
+        presenter.decrease15Seconds();
+        presenter.decrease15Seconds();
+        presenter.decrease15Seconds();
+        presenter.decrease15Seconds();
+        assertThat(secondsEntity.getMinutes(), is(1));
+        assertThat(secondsEntity.getSeconds(), is(15));
+    }
+
     private int incrementSeconds(int seconds) {
         FrontView view = mock(FrontView.class);
-        MinutesSecondsEntity secondsEntity = new MinutesSecondsEntity(1, seconds);
-        FrontPresenter presenter = new FrontPresenter(new FrontModel(secondsEntity));
+        CountdownEntity secondsEntity = new CountdownEntity(1, seconds);
+        FrontPresenter presenter = new FrontPresenter(new FrontModel(secondsEntity), new BackModel(secondsEntity));
         presenter.setView(view);
         presenter.increase15Seconds();
         return secondsEntity.getSeconds();
@@ -41,8 +56,8 @@ public class FrontPresenterTest {
 
     private int decrementSeconds(int seconds) {
         FrontView view = mock(FrontView.class);
-        MinutesSecondsEntity secondsEntity = new MinutesSecondsEntity(1, seconds);
-        FrontPresenter presenter = new FrontPresenter(new FrontModel(secondsEntity));
+        CountdownEntity secondsEntity = new CountdownEntity(1, seconds);
+        FrontPresenter presenter = new FrontPresenter(new FrontModel(secondsEntity), new BackModel(secondsEntity));
         presenter.setView(view);
         presenter.decrease15Seconds();
         return secondsEntity.getSeconds();

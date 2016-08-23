@@ -52,12 +52,12 @@ public class FrontCountdownSelectFragment extends Fragment implements FrontView 
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
         frontPresenter.setView(this);
-
         countdownPicker.setOnTouchListener(new OnUpDownListener(frontPresenter));
     }
 
     @OnClick(R.id.startButton)
     public void startCountdown() {
+        frontPresenter.startCountdown();
         getFragmentManager()
                 .beginTransaction()
 

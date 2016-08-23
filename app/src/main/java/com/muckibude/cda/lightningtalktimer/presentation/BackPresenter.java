@@ -46,7 +46,7 @@ public class BackPresenter implements Presenter<BackView>, PauseableMinutesSecon
     }
 
     public void startTimer() {
-        Log.d(TAG, "start timer");
+        Log.d(TAG, "start timer with: " + backModel.getCountdownEntity());
         pauseableMinutesSecondsTimer.setMinutes(backModel.getMinutes());
         pauseableMinutesSecondsTimer.setSeconds(backModel.getSeconds());
         pauseableMinutesSecondsTimer.start();

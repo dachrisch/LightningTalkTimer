@@ -49,6 +49,17 @@ public class FrontCountdownTimerSettingsTest {
     }
 
     @Test
+    public void swipeDown4TimesWillChangeTimeBy1Minute() {
+        onView(withId(R.id.minutes)).check(matches(withTextOnView("2")));
+        onView(withId(R.id.seconds)).check(matches(withTextOnView("15")));
+
+        onView(withId(R.id.countdownPicker)).perform(swipeDown()).perform(swipeDown()).perform(swipeDown()).perform(swipeDown());
+
+        onView(withId(R.id.minutes)).check(matches(withTextOnView("1")));
+        onView(withId(R.id.seconds)).check(matches(withTextOnView("15")));
+    }
+
+    @Test
     public void onSimpleClickColorWillChange() {
         onView(withId(R.id.countdownPicker)).perform(click()).check(matches(withBackgroundColor("#ff00ff")));
     }

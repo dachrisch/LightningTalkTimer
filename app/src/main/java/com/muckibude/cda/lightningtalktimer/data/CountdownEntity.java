@@ -1,10 +1,12 @@
 package com.muckibude.cda.lightningtalktimer.data;
 
-public class MinutesSecondsEntity {
+import java.util.Locale;
+
+public class CountdownEntity {
     private int seconds;
     private int minutes;
 
-    public MinutesSecondsEntity(int minutes, int seconds) {
+    public CountdownEntity(int minutes, int seconds) {
         this.seconds = seconds;
         this.minutes = minutes;
     }
@@ -37,5 +39,15 @@ public class MinutesSecondsEntity {
                 this.seconds = 0;
             }
         }
+    }
+
+    public void updateWith(CountdownEntity countdownEntity) {
+        this.minutes = countdownEntity.getMinutes();
+        this.seconds = countdownEntity.getSeconds();
+    }
+
+    @Override
+    public String toString() {
+        return String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
     }
 }
