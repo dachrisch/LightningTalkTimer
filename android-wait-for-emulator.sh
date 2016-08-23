@@ -3,8 +3,6 @@
 # Originally written by Ralf Kistner <ralf@embarkmobile.com>, but placed in the public domain
 # Source: https://github.com/gildegoma/chef-android-sdk/blob/master/files/default/android-wait-for-emulator
 
-set +e
-
 bootanim=""
 failcounter=0
 until [[ "$bootanim" =~ "running" ]]; do
