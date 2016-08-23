@@ -21,3 +21,4 @@ until [[ "$bootanim" =~ "running" ]]; do
 done
 echo "Done"
 
+set -e
