@@ -18,9 +18,9 @@ public class ImageResourceMatcher extends TypeSafeMatcher<View> {
     }
 
     private final int expectedId;
-    String resourceName;
+    private String resourceName;
 
-    public ImageResourceMatcher(int expectedId) {
+    private ImageResourceMatcher(int expectedId) {
         super(View.class);
         this.expectedId = expectedId;
     }
@@ -35,7 +35,7 @@ public class ImageResourceMatcher extends TypeSafeMatcher<View> {
             return imageView.getDrawable() == null;
         }
         Resources resources = target.getContext().getResources();
-        Drawable expectedDrawable = resources.getDrawable(expectedId);
+        Drawable expectedDrawable = resources.getDrawable(expectedId, target.getContext().getTheme());
         resourceName = resources.getResourceEntryName(expectedId);
 
         if (expectedDrawable == null) {

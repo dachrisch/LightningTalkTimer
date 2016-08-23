@@ -33,5 +33,6 @@
         android:layout_height="50dp"
         android:id="@+id/pauseButton"
         android:src="@drawable/pause_overlay"
-        android:layout_marginBottom="67dp"/>
+        android:layout_marginBottom="67dp"
+        android:contentDescription="Start/Pause Button"/>
 </RelativeLayout>

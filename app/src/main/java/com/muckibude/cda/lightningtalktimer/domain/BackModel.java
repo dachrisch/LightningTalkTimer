@@ -6,7 +6,7 @@ import javax.inject.Inject;
 
 public class BackModel {
 
-    private CountdownEntity countdownEntity;
+    private final CountdownEntity countdownEntity;
 
     @Inject
     public BackModel(CountdownEntity countdownEntity) {

@@ -19,7 +19,7 @@ public class PauseableMinutesSecondsTimer {
 
     private boolean isRunning = false;
 
-    public PauseableMinutesSecondsTimer start() {
+    public void start() {
         countDownTimer = new CountDownTimer(inMillis(), 1000) {
             @Override
             public void onTick(long l) {
@@ -38,7 +38,6 @@ public class PauseableMinutesSecondsTimer {
             }
         }.start();
         isRunning = true;
-        return this;
     }
 
     public void setMinutes(int minutes) {
@@ -88,7 +87,7 @@ public class PauseableMinutesSecondsTimer {
 
     public static class TimeBuilder {
 
-        private PauseableMinutesSecondsTimer pauseableMinutesSecondsTimer = new PauseableMinutesSecondsTimer();
+        private final PauseableMinutesSecondsTimer pauseableMinutesSecondsTimer = new PauseableMinutesSecondsTimer();
 
         public TimeBuilder(OnSecondCallback doEverySecond) {
             pauseableMinutesSecondsTimer.setOnSecondsCallback(doEverySecond);

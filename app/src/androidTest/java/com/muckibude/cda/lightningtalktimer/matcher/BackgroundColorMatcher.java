@@ -19,7 +19,7 @@ public class BackgroundColorMatcher extends TypeSafeMatcher<View> {
         return new BackgroundColorMatcher(color);
     }
 
-    public BackgroundColorMatcher(String rgbColor) {
+    private BackgroundColorMatcher(String rgbColor) {
         super(View.class);
         this.expectedColor = Color.parseColor(rgbColor);
     }

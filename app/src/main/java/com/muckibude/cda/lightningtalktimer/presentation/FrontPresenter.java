@@ -10,7 +10,7 @@ import java.util.Locale;
 import javax.inject.Inject;
 
 public class FrontPresenter implements Presenter<FrontView> {
-    public static final String TAG = "FrontPresenter";
+    private static final String TAG = "FrontPresenter";
     private final FrontModel frontModel;
     private final BackModel backModel;
     private FrontView frontView;

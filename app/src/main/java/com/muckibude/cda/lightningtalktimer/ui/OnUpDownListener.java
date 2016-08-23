@@ -12,7 +12,7 @@ import com.muckibude.cda.lightningtalktimer.presentation.FrontPresenter;
  * Created by cda on 27.07.16.
  */
 public class OnUpDownListener implements View.OnTouchListener {
-    private FrontPresenter frontPresenter;
+    private final FrontPresenter frontPresenter;
 
     private static final int MAX_ALLOWED_DISTANCE = 200;
     private float viewPosition;

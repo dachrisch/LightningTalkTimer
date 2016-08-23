@@ -6,7 +6,7 @@ import android.content.Context;
 public class DaggerAwareApplication extends Application {
     private TimerComponent component;
 
-    protected TimerModule getApplicationModule() {
+    private TimerModule getApplicationModule() {
         return new TimerModule();
     }
 
