@@ -16,8 +16,8 @@ android {
     }
 
     sourceSets {
-        androidTest.java.srcDirs = ['src/androidTest/java', ]
-        test.java.srcDirs = ['src/test/java', ]
+        androidTest.java.srcDirs = ['src/androidTest/java']
+        test.java.srcDirs = ['src/test/java']
     }
 
     buildTypes {

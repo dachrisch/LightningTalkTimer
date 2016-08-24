@@ -61,7 +61,8 @@ public class FrontCountdownTimerSettingsTest {
 
     @Test
     public void onSimpleClickColorWillChange() {
-        onView(withId(R.id.countdownPicker)).perform(click()).check(matches(withBackgroundColor("#ff00ff")));
+        onView(withId(R.id.countdownPicker)).check(matches(withBackgroundColor("#ff4fff")));
+        onView(withId(R.id.countdownPicker)).perform(click()).check(matches(withBackgroundColor("#ffff4f")));
     }
 
 }

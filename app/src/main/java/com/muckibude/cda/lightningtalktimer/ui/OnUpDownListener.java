@@ -12,9 +12,10 @@ import com.muckibude.cda.lightningtalktimer.presentation.FrontPresenter;
  * Created by cda on 27.07.16.
  */
 public class OnUpDownListener implements View.OnTouchListener {
+    public static final int MOVE_THRESHOLD = 20;
     private final FrontPresenter frontPresenter;
 
-    private static final int MAX_ALLOWED_DISTANCE = 200;
+    private static final int MAX_ALLOWED_DISTANCE = 250;
     private float viewPosition;
     private float firstDownPosition;
     private static final String TAG = "TimeChangeOnTouchListen";
@@ -33,22 +34,40 @@ public class OnUpDownListener implements View.OnTouchListener {
                 Log.d(TAG, String.format("action down event. viewPosition = %f", viewPosition));
                 break;
             case MotionEvent.ACTION_MOVE:
-                animateView(view, motionEvent);
+                if (shouldAnimate(motionEvent)) {
+                    animateView(view, motionEvent);
+                }
                 break;
             case MotionEvent.ACTION_UP:
-                boolean up = Math.signum(motionEvent.getRawY() - firstDownPosition) < 0;
-                if (up) {
-                    frontPresenter.increase15Seconds();
+                if (shouldAnimate(motionEvent)) {
+                    toggleTimer(view, motionEvent);
                 } else {
-                    frontPresenter.decrease15Seconds();
+                    changeColor();
                 }
-                Log.d(TAG, String.format("resetting to original position(%f)", viewPosition));
-                view.animate().y(viewPosition).setDuration(5).start();
                 break;
             default:
                 return false;
         }
         return true;
+    }
+
+    private boolean shouldAnimate(MotionEvent motionEvent) {
+        return Math.abs(motionEvent.getRawY() - firstDownPosition) > MOVE_THRESHOLD;
+    }
+
+    private void changeColor() {
+        frontPresenter.toggleColor();
+    }
+
+    private void toggleTimer(View view, MotionEvent motionEvent) {
+        boolean up = Math.signum(motionEvent.getRawY() - firstDownPosition) < 0;
+        if (up) {
+            frontPresenter.increase15Seconds();
+        } else {
+            frontPresenter.decrease15Seconds();
+        }
+        Log.d(TAG, String.format("resetting to original position(%f)", viewPosition));
+        view.animate().y(viewPosition).setDuration(5).start();
     }
 
     private void animateView(View view, MotionEvent motionEvent) {

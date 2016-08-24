@@ -30,8 +30,8 @@ public class BackgroundColorMatcher extends TypeSafeMatcher<View> {
         if (!(drawable instanceof GradientDrawable)) {
             return false;
         }
-        GradientDrawable colorGradientDrawable = (GradientDrawable) drawable;
-        actualColor = colorGradientDrawable.getColor().getDefaultColor();
+        GradientDrawable gradientDrawable = (GradientDrawable) drawable;
+        actualColor = gradientDrawable.getColor().getDefaultColor();
         Log.d("BackgroundColorMatcher", Integer.toString(actualColor));
         return expectedColor == actualColor;
     }

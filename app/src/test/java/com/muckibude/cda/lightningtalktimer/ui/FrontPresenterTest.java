@@ -8,9 +8,12 @@ import com.muckibude.cda.lightningtalktimer.presentation.FrontView;
 
 import org.junit.Test;
 
+import static com.muckibude.cda.lightningtalktimer.domain.FrontModel.toColor;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class FrontPresenterTest {
 
@@ -43,6 +46,27 @@ public class FrontPresenterTest {
         presenter.decrease15Seconds();
         assertThat(secondsEntity.getMinutes(), is(1));
         assertThat(secondsEntity.getSeconds(), is(15));
+    }
+
+    @Test
+    public void toggleThroughColors() {
+        FrontView view = mock(FrontView.class);
+
+        CountdownEntity secondsEntity = new CountdownEntity(2, 15);
+        FrontPresenter presenter = new FrontPresenter(new FrontModel(secondsEntity), new BackModel(secondsEntity));
+        presenter.setView(view);
+
+        when(view.getCurrentColor()).thenReturn(toColor("ff4fff"));
+        presenter.toggleColor();
+        verify(view).switchPickerColorTo(toColor("ffff4f"));
+
+        when(view.getCurrentColor()).thenReturn(toColor("ffff4f"));
+        presenter.toggleColor();
+        verify(view).switchPickerColorTo(toColor("4fffff"));
+
+        when(view.getCurrentColor()).thenReturn(toColor("4fffff"));
+        presenter.toggleColor();
+        verify(view).switchPickerColorTo(toColor("ff4fff"));
     }
 
     private int incrementSeconds(int seconds) {

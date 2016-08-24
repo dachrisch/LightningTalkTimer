@@ -1,6 +1,7 @@
 package com.muckibude.cda.lightningtalktimer.ui;
 
 import android.app.Fragment;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -88,5 +89,15 @@ public class FrontCountdownSelectFragment extends Fragment implements FrontView 
     public void display(int minutes, int seconds) {
         secondsView.setText(String.format(Locale.getDefault(), "%02d", seconds));
         minutesView.setText(String.format(Locale.getDefault(), "%d", minutes));
+    }
+
+    @Override
+    public void switchPickerColorTo(Integer color) {
+        ((GradientDrawable) countdownPicker.getBackground()).setColor(color);
+    }
+
+    @Override
+    public int getCurrentColor() {
+        return ((GradientDrawable) countdownPicker.getBackground()).getColor().getDefaultColor();
     }
 }
