@@ -1,6 +1,7 @@
 package com.muckibude.cda.lightningtalktimer.ui;
 
 import android.app.Fragment;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -35,6 +36,9 @@ public class BackCountdownDisplayFragment extends Fragment implements BackView {
     @BindView(R.id.pauseButton)
     ImageView pauseButton;
 
+    @BindView(R.id.back_fragment_view)
+    View background;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +63,12 @@ public class BackCountdownDisplayFragment extends Fragment implements BackView {
         backPresenter.startTimer();
     }
 
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        backPresenter.applyBackgroundColor();
+    }
+
     @OnClick(R.id.pauseButton)
     public void toggleTimer() {
         backPresenter.toggleTimer();
@@ -76,6 +86,11 @@ public class BackCountdownDisplayFragment extends Fragment implements BackView {
     public void display(int seconds) {
         smallNumberView.setVisibility(View.INVISIBLE);
         bigNumberView.setText(String.format(Locale.getDefault(), "%d", seconds));
+    }
+
+    @Override
+    public void setBackgroundColor(int backgroundColor) {
+        ((ColorDrawable) background.getBackground()).setColor(backgroundColor);
     }
 
     @Override

@@ -1,14 +1,17 @@
 package com.muckibude.cda.lightningtalktimer.ui;
 
+import android.support.annotation.NonNull;
+
 import com.muckibude.cda.lightningtalktimer.data.CountdownEntity;
 import com.muckibude.cda.lightningtalktimer.domain.BackModel;
+import com.muckibude.cda.lightningtalktimer.domain.ColorProvider;
 import com.muckibude.cda.lightningtalktimer.domain.FrontModel;
 import com.muckibude.cda.lightningtalktimer.presentation.FrontPresenter;
 import com.muckibude.cda.lightningtalktimer.presentation.FrontView;
 
 import org.junit.Test;
 
-import static com.muckibude.cda.lightningtalktimer.domain.FrontModel.toColor;
+import static com.muckibude.cda.lightningtalktimer.domain.ColorProvider.toColor;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
@@ -38,7 +41,7 @@ public class FrontPresenterTest {
     public void whenDecreasing60SecondsNextMinuteWillBeDecreased() {
         FrontView view = mock(FrontView.class);
         CountdownEntity secondsEntity = new CountdownEntity(2, 15);
-        FrontPresenter presenter = new FrontPresenter(new FrontModel(secondsEntity), new BackModel(secondsEntity));
+        FrontPresenter presenter = createFrontPresenter(secondsEntity);
         presenter.setView(view);
         presenter.decrease15Seconds();
         presenter.decrease15Seconds();
@@ -53,26 +56,28 @@ public class FrontPresenterTest {
         FrontView view = mock(FrontView.class);
 
         CountdownEntity secondsEntity = new CountdownEntity(2, 15);
-        FrontPresenter presenter = new FrontPresenter(new FrontModel(secondsEntity), new BackModel(secondsEntity));
+        FrontModel frontModel = new FrontModel(secondsEntity);
+        frontModel.setColors(new ColorProvider());
+        FrontPresenter presenter = new FrontPresenter(frontModel, new BackModel(secondsEntity));
         presenter.setView(view);
 
-        when(view.getCurrentColor()).thenReturn(toColor("ff4fff"));
+        when(view.getCurrentColor()).thenReturn(toColor("dd77ff"));
         presenter.toggleColor();
-        verify(view).switchPickerColorTo(toColor("ffff4f"));
+        verify(view).switchPickerColorTo(toColor("77ff77"));
 
-        when(view.getCurrentColor()).thenReturn(toColor("ffff4f"));
+        when(view.getCurrentColor()).thenReturn(toColor("77ff77"));
         presenter.toggleColor();
-        verify(view).switchPickerColorTo(toColor("4fffff"));
+        verify(view).switchPickerColorTo(toColor("77ddff"));
 
-        when(view.getCurrentColor()).thenReturn(toColor("4fffff"));
+        when(view.getCurrentColor()).thenReturn(toColor("77ddff"));
         presenter.toggleColor();
-        verify(view).switchPickerColorTo(toColor("ff4fff"));
+        verify(view).switchPickerColorTo(toColor("dd77ff"));
     }
 
     private int incrementSeconds(int seconds) {
         FrontView view = mock(FrontView.class);
         CountdownEntity secondsEntity = new CountdownEntity(1, seconds);
-        FrontPresenter presenter = new FrontPresenter(new FrontModel(secondsEntity), new BackModel(secondsEntity));
+        FrontPresenter presenter = createFrontPresenter(secondsEntity);
         presenter.setView(view);
         presenter.increase15Seconds();
         return secondsEntity.getSeconds();
@@ -81,9 +86,14 @@ public class FrontPresenterTest {
     private int decrementSeconds(int seconds) {
         FrontView view = mock(FrontView.class);
         CountdownEntity secondsEntity = new CountdownEntity(1, seconds);
-        FrontPresenter presenter = new FrontPresenter(new FrontModel(secondsEntity), new BackModel(secondsEntity));
+        FrontPresenter presenter = createFrontPresenter(secondsEntity);
         presenter.setView(view);
         presenter.decrease15Seconds();
         return secondsEntity.getSeconds();
+    }
+
+    @NonNull
+    private FrontPresenter createFrontPresenter(CountdownEntity secondsEntity) {
+        return new FrontPresenter(new FrontModel(secondsEntity), new BackModel(secondsEntity));
     }
 }

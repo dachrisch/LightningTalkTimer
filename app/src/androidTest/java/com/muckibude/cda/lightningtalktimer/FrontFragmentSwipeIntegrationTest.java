@@ -18,7 +18,7 @@ import static com.muckibude.cda.lightningtalktimer.matcher.BackgroundColorMatche
 import static com.muckibude.cda.lightningtalktimer.matcher.TextViewMatcher.withTextOnView;
 
 @RunWith(AndroidJUnit4.class)
-public class FrontCountdownTimerSettingsTest {
+public class FrontFragmentSwipeIntegrationTest {
     @Rule
     public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
             MainActivity.class);
@@ -61,8 +61,8 @@ public class FrontCountdownTimerSettingsTest {
 
     @Test
     public void onSimpleClickColorWillChange() {
-        onView(withId(R.id.countdownPicker)).check(matches(withBackgroundColor("#ff4fff")));
-        onView(withId(R.id.countdownPicker)).perform(click()).check(matches(withBackgroundColor("#ffff4f")));
+        onView(withId(R.id.countdownPicker)).check(matches(withBackgroundColor("#77ff77")));
+        onView(withId(R.id.countdownPicker)).perform(click()).check(matches(withBackgroundColor("#77ddff")));
     }
 
 }

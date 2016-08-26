@@ -8,4 +8,6 @@ public interface BackView {
     void resume();
 
     void display(int seconds);
+
+    void setBackgroundColor(int backgroundColor);
 }

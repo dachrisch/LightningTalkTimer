@@ -67,4 +67,8 @@ public class BackPresenter implements Presenter<BackView>, PauseableMinutesSecon
     public void stopTimer() {
         pauseableMinutesSecondsTimer.cancel();
     }
+
+    public void applyBackgroundColor() {
+        backView.setBackgroundColor(backModel.getBackgroundColor());
+    }
 }

@@ -1,6 +1,7 @@
 package com.muckibude.cda.lightningtalktimer.matcher;
 
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.util.Log;
@@ -27,11 +28,13 @@ public class BackgroundColorMatcher extends TypeSafeMatcher<View> {
     @Override
     protected boolean matchesSafely(View target) {
         Drawable drawable = target.getBackground();
-        if (!(drawable instanceof GradientDrawable)) {
+        if (drawable instanceof GradientDrawable) {
+            actualColor = ((GradientDrawable) drawable).getColor().getDefaultColor();
+        } else if (drawable instanceof ColorDrawable) {
+            actualColor = ((ColorDrawable) drawable).getColor();
+        } else {
             return false;
         }
-        GradientDrawable gradientDrawable = (GradientDrawable) drawable;
-        actualColor = gradientDrawable.getColor().getDefaultColor();
         Log.d("BackgroundColorMatcher", Integer.toString(actualColor));
         return expectedColor == actualColor;
     }

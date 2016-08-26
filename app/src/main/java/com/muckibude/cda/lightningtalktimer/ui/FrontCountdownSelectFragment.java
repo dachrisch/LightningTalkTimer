@@ -56,9 +56,16 @@ public class FrontCountdownSelectFragment extends Fragment implements FrontView 
         countdownPicker.setOnTouchListener(new OnUpDownListener(frontPresenter));
     }
 
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        frontPresenter.toggleColor();
+    }
+
     @OnClick(R.id.startButton)
     public void startCountdown() {
         frontPresenter.startCountdown();
+        frontPresenter.setSelectedColor(getCurrentColor());
         getFragmentManager()
                 .beginTransaction()
 

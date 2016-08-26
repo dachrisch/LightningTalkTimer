@@ -17,7 +17,7 @@ import static com.muckibude.cda.lightningtalktimer.matcher.ImageResourceMatcher.
 import static com.muckibude.cda.lightningtalktimer.matcher.TextViewMatcher.withTextOnView;
 
 @RunWith(AndroidJUnit4.class)
-public class BackCountdownDisplayFragmentIntegrationTest {
+public class BackFragmentCountdownTests {
     @Rule
     public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
             MainActivity.class);
@@ -33,20 +33,20 @@ public class BackCountdownDisplayFragmentIntegrationTest {
     }
 
     @Test
+    public void onResumeTimerWillResume() {
+        onView(withId(R.id.startButton)).perform(click());
+        onView(withId(R.id.pauseButton)).check(matches(withDrawable(R.drawable.pause_overlay)));
+        onView(withId(R.id.pauseButton)).perform(click());
+        onView(withId(R.id.pauseButton)).check(matches(withDrawable(R.drawable.play_overlay_icon)));
+    }
+
+    @Test
     public void countdownDisplayShownWhenStartButtonPressed() {
         onView(withId(R.id.minutes)).check(matches(withTextOnView("2")));
         onView(withId(R.id.seconds)).check(matches(withTextOnView("15")));
         onView(withId(R.id.startButton)).perform(click());
         onView(withId(R.id.big_number_text_view)).check(matches(isDisplayed()));
         onView(withId(R.id.small_number_text_view)).check(matches(isDisplayed()));
-    }
-
-    @Test
-    public void onResumeTimerWillResume() {
-        onView(withId(R.id.startButton)).perform(click());
-        onView(withId(R.id.pauseButton)).check(matches(withDrawable(R.drawable.pause_overlay)));
-        onView(withId(R.id.pauseButton)).perform(click());
-        onView(withId(R.id.pauseButton)).check(matches(withDrawable(R.drawable.play_overlay_icon)));
     }
 
 }

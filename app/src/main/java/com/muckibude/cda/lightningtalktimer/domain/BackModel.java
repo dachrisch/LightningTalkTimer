@@ -7,6 +7,7 @@ import javax.inject.Inject;
 public class BackModel {
 
     private final CountdownEntity countdownEntity;
+    private int backgroundColor;
 
     @Inject
     public BackModel(CountdownEntity countdownEntity) {
@@ -31,6 +32,14 @@ public class BackModel {
 
     public CountdownEntity getCountdownEntity() {
         return countdownEntity;
+    }
+
+    public void setBackgroundColor(int backgroundColor) {
+        this.backgroundColor = backgroundColor;
+    }
+
+    public int getBackgroundColor() {
+        return backgroundColor;
     }
 }
 

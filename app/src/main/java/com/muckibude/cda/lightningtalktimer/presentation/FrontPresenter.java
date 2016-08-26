@@ -52,4 +52,8 @@ public class FrontPresenter implements Presenter<FrontView> {
     public void toggleColor() {
         frontView.switchPickerColorTo(frontModel.getNextColor(frontView.getCurrentColor()));
     }
+
+    public void setSelectedColor(int selectedColor) {
+        backModel.setBackgroundColor(selectedColor);
+    }
 }
