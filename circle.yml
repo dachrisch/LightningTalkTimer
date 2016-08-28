@@ -1,0 +1,17 @@
+machine:
+  environment:
+    ANDROID_HOME: /usr/local/android-sdk-linux
+    GRADLE_OPTS: -Xmx512m
+
+dependencies:
+  post:
+    - echo y | android update sdk --no-ui --all --filter "tool,platform-tools,build-tools-24.0.1,android-24"
+    -  echo n | android create avd -n testing -f -t android-24
+
+test:
+  override:
+    - emulator -avd testing -no-window -no-boot-anim -no-audio:
+        background: true
+        parallel: true
+    - circle-android wait-for-boot
+    - ./gradlew connectedAndroidTest

@@ -4,6 +4,7 @@
 # Source: https://github.com/gildegoma/chef-android-sdk/blob/master/files/default/android-wait-for-emulator
 
 echo -n "checking for device start..."
+adb wait-for-any-device
 bootanim=""
 failcounter=0
 until [[ "$bootanim" =~ "running" ]]; do
