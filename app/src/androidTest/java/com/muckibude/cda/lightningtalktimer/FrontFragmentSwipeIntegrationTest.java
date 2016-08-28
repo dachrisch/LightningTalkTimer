@@ -1,12 +1,16 @@
 package com.muckibude.cda.lightningtalktimer;
 
 
+import android.support.test.espresso.IdlingPolicies;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.util.concurrent.TimeUnit;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -22,6 +26,12 @@ public class FrontFragmentSwipeIntegrationTest {
     @Rule
     public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
             MainActivity.class);
+
+    @Before
+    public void setIdleTimes() {
+        IdlingPolicies.setMasterPolicyTimeout(10, TimeUnit.MINUTES);
+        IdlingPolicies.setIdlingResourceTimeout(10, TimeUnit.MINUTES);
+    }
 
     @Test
     public void swipeUpWillChangeTimeBy15Seconds() {
