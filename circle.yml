@@ -10,8 +10,7 @@ dependencies:
 
 test:
   override:
-    - emulator -avd testing -no-window -no-boot-anim -no-audio:
-        abi armeabi-v7a
+    - emulator -avd testing -no-window -no-boot-anim -no-audio --abi armeabi-v7a:
         background: true
         parallel: true
     - circle-android wait-for-boot
