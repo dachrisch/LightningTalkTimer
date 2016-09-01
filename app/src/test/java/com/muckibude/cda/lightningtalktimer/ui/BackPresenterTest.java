@@ -8,8 +8,6 @@ import com.muckibude.cda.lightningtalktimer.presentation.BackView;
 
 import org.junit.Test;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -31,7 +29,7 @@ public class BackPresenterTest {
         PauseableMinutesSecondsTimer timer = mock(PauseableMinutesSecondsTimer.class);
         BackPresenter backPresenter = new BackPresenter(new BackModel(new CountdownEntity(1, 0)), timer);
         backPresenter.setView(backView);
-        backPresenter.onSecond(60 * 1000);
+        backPresenter.onSecond(59 * 1000);
         verify(backView).display(59);
     }
 
@@ -50,12 +48,6 @@ public class BackPresenterTest {
         fragment.backPresenter = new BackPresenter(new BackModel(new CountdownEntity(1, 0)), timer);
         fragment.onDestroyView();
         verify(timer).cancel();
-    }
-
-    @Test
-    public void rounding() {
-        assertThat(Math.ceil((134900.0 / 1000.0) % 60.0), is(15.0));
-        assertThat((int) Math.floor(14.997), is(14));
     }
 
 
