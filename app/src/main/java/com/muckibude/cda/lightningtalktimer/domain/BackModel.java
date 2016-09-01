@@ -22,11 +22,11 @@ public class BackModel {
         return countdownEntity.getSeconds();
     }
 
-    public void updateCountdownEntity(CountdownEntity countdownEntity) {
+    public void setInitialCountdown(CountdownEntity countdownEntity) {
         this.countdownEntity.updateWith(countdownEntity);
     }
 
-    public void updateTime(int minutes, int seconds) {
+    public void updateCountdown(int minutes, int seconds) {
         countdownEntity.update(minutes, seconds);
     }
 

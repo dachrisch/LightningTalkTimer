@@ -46,7 +46,7 @@ public class FrontPresenter implements Presenter<FrontView> {
 
     public void startCountdown() {
         Log.d(TAG, String.valueOf(frontModel.getCountdownEntity()));
-        backModel.updateCountdownEntity(frontModel.getCountdownEntity());
+        backModel.setInitialCountdown(frontModel.getCountdownEntity());
     }
 
     public void toggleColor() {

@@ -105,6 +105,7 @@ public class BackCountdownDisplayFragment extends Fragment implements BackView {
         animation.setRepeatCount(Animation.INFINITE);
         animation.setRepeatMode(Animation.REVERSE);
         background.startAnimation(animation);
+        pauseButton.setVisibility(View.INVISIBLE);
     }
 
     @Override

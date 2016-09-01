@@ -27,7 +27,7 @@ public class BackPresenter implements Presenter<BackView>, PauseableMinutesSecon
         Log.d(TAG, "decrement one second");
         int seconds = (int) Math.ceil((Double.valueOf(millisRemaining) / 1000.0) % 60.0);
         int minutes = (int) Math.floor((Double.valueOf(millisRemaining) / 1000.0) / 60.0);
-        backModel.updateTime(minutes, seconds);
+        backModel.updateCountdown(minutes, seconds);
         displayCountdown();
     }
 
@@ -53,8 +53,8 @@ public class BackPresenter implements Presenter<BackView>, PauseableMinutesSecon
 
     public void startTimer() {
         Log.d(TAG, "start timer with: " + backModel.getCountdownEntity());
-        pauseableMinutesSecondsTimer.setMinutes(backModel.getMinutes());
-        pauseableMinutesSecondsTimer.setSeconds(backModel.getSeconds());
+        pauseableMinutesSecondsTimer.setStartMinutes(backModel.getMinutes());
+        pauseableMinutesSecondsTimer.setStartSeconds(backModel.getSeconds());
         pauseableMinutesSecondsTimer.start();
     }
 
@@ -62,8 +62,8 @@ public class BackPresenter implements Presenter<BackView>, PauseableMinutesSecon
         if (null != pauseableMinutesSecondsTimer) {
             if (pauseableMinutesSecondsTimer.isRunning()) {
                 pauseableMinutesSecondsTimer.pause();
-                pauseableMinutesSecondsTimer.setSeconds(backModel.getSeconds());
-                pauseableMinutesSecondsTimer.setMinutes(backModel.getMinutes());
+                pauseableMinutesSecondsTimer.setStartSeconds(backModel.getSeconds());
+                pauseableMinutesSecondsTimer.setStartMinutes(backModel.getMinutes());
                 backView.pause();
             } else {
                 pauseableMinutesSecondsTimer.resume();

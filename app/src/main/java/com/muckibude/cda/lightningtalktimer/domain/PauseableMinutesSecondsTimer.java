@@ -8,8 +8,8 @@ import java.util.Locale;
 public class PauseableMinutesSecondsTimer {
     private static final String TAG = "PauseableMinutesSeconds";
     private CountDownTimer countDownTimer;
-    private int minutes;
-    private int seconds;
+    private int startMinutes;
+    private int startSeconds;
     private OnSecondCallback onSecondsCallback;
     private OnFinishCallback onFinishCallback;
 
@@ -34,22 +34,24 @@ public class PauseableMinutesSecondsTimer {
                 if (onFinishCallback != null) {
                     onFinishCallback.onFinish();
                     isRunning = false;
+                    startMinutes = 0;
+                    startSeconds = 0;
                 }
             }
         }.start();
         isRunning = true;
     }
 
-    public void setMinutes(int minutes) {
-        this.minutes = minutes;
+    public void setStartMinutes(int minutes) {
+        this.startMinutes = minutes;
     }
 
-    public void setSeconds(int seconds) {
-        this.seconds = seconds;
+    public void setStartSeconds(int seconds) {
+        this.startSeconds = seconds;
     }
 
     private long inMillis() {
-        return (minutes * 60 + seconds) * 1000;
+        return (startMinutes * 60 + startSeconds) * 1000;
     }
 
     public void setOnSecondsCallback(OnSecondCallback onSecondsCallback) {
