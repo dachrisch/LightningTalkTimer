@@ -9,7 +9,6 @@ import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.action.ViewActions.pressBack;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static com.muckibude.cda.lightningtalktimer.matcher.BackgroundColorMatcher.withBackgroundColor;
@@ -32,7 +31,7 @@ public class BackFragmentColorIntegrationTest {
         onView(withId(R.id.countdownPicker)).check(matches(withBackgroundColor("#77ff77")));
         onView(withId(R.id.startButton)).perform(click());
         onView(withId(R.id.back_fragment_view)).check(matches(withBackgroundColor("#77ff77")));
-        pressBack();
+        mActivityRule.getActivity().getFragmentManager().popBackStack();
         onView(withId(R.id.countdownPicker)).check(matches(withBackgroundColor("#77ff77")));
     }
 }

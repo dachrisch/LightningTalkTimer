@@ -46,4 +46,8 @@ public class FrontModel {
     public void setColors(ColorProvider colors) {
         this.colors = colors;
     }
+
+    public Integer getFirstColor() {
+        return colors.get(0);
+    }
 }

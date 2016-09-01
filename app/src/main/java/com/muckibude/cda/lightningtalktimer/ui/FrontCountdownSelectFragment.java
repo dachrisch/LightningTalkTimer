@@ -59,13 +59,13 @@ public class FrontCountdownSelectFragment extends Fragment implements FrontView 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        frontPresenter.toggleColor();
+        frontPresenter.setColorFromBackground();
     }
 
     @OnClick(R.id.startButton)
     public void startCountdown() {
         frontPresenter.startCountdown();
-        frontPresenter.setSelectedColor(getCurrentColor());
+        frontPresenter.setColorForBackground(getCurrentColor());
         getFragmentManager()
                 .beginTransaction()
 
