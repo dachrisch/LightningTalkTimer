@@ -50,4 +50,9 @@ public class CountdownEntity {
     public String toString() {
         return String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
     }
+
+    public void update(int minutes, int seconds) {
+        this.minutes = minutes;
+        this.seconds = seconds;
+    }
 }

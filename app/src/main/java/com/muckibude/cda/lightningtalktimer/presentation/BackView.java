@@ -10,4 +10,6 @@ public interface BackView {
     void display(int seconds);
 
     void setBackgroundColor(int backgroundColor);
+
+    void blinkScreen();
 }

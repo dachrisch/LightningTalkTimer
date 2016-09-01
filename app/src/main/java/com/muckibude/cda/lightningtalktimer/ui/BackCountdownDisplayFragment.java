@@ -8,6 +8,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -86,11 +89,22 @@ public class BackCountdownDisplayFragment extends Fragment implements BackView {
     public void display(int seconds) {
         smallNumberView.setVisibility(View.INVISIBLE);
         bigNumberView.setText(String.format(Locale.getDefault(), "%d", seconds));
+        Log.d(TAG, String.format(Locale.getDefault(), "remaining time %02d", seconds));
     }
 
     @Override
     public void setBackgroundColor(int backgroundColor) {
         ((ColorDrawable) background.getBackground()).setColor(backgroundColor);
+    }
+
+    @Override
+    public void blinkScreen() {
+        Animation animation = new AlphaAnimation(1, 0);
+        animation.setDuration(500);
+        animation.setInterpolator(new LinearInterpolator());
+        animation.setRepeatCount(Animation.INFINITE);
+        animation.setRepeatMode(Animation.REVERSE);
+        background.startAnimation(animation);
     }
 
     @Override

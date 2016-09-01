@@ -20,12 +20,12 @@ public class PauseableMinutesSecondsTimer {
     private boolean isRunning = false;
 
     public void start() {
-        countDownTimer = new CountDownTimer(inMillis(), 1000) {
+        countDownTimer = new CountDownTimer(inMillis(), 500) {
             @Override
-            public void onTick(long l) {
+            public void onTick(long millisRemaining) {
                 if (onSecondsCallback != null) {
-                    Log.d(TAG, String.format(Locale.getDefault(), "remaining millis: %d", l));
-                    onSecondsCallback.onSecond();
+                    Log.d(TAG, String.format(Locale.getDefault(), "remaining millis: %d", millisRemaining));
+                    onSecondsCallback.onSecond(millisRemaining);
                 }
             }
 
@@ -69,55 +69,16 @@ public class PauseableMinutesSecondsTimer {
         start();
     }
 
-    public static TimeBuilder doEverySecond(OnSecondCallback doEverySecond) {
-        return new TimeBuilder(doEverySecond);
-    }
-
     public void cancel() {
         pause();
     }
 
     public interface OnSecondCallback {
-        void onSecond();
+        void onSecond(long millisRemaining);
     }
 
     public interface OnFinishCallback {
         void onFinish();
-    }
-
-    public static class TimeBuilder {
-
-        private final PauseableMinutesSecondsTimer pauseableMinutesSecondsTimer = new PauseableMinutesSecondsTimer();
-
-        public TimeBuilder(OnSecondCallback doEverySecond) {
-            pauseableMinutesSecondsTimer.setOnSecondsCallback(doEverySecond);
-
-        }
-
-
-        public OnFinishBuilder startAt(int minutes, int seconds) {
-            return new OnFinishBuilder(pauseableMinutesSecondsTimer).minutes(minutes).seconds(seconds);
-        }
-
-    }
-
-    public static class OnFinishBuilder {
-        private final PauseableMinutesSecondsTimer pauseableMinutesSecondsTimer;
-
-        public OnFinishBuilder(PauseableMinutesSecondsTimer pauseableMinutesSecondsTimer) {
-            this.pauseableMinutesSecondsTimer = pauseableMinutesSecondsTimer;
-        }
-
-        private OnFinishBuilder minutes(int minutes) {
-            pauseableMinutesSecondsTimer.setMinutes(minutes);
-            return this;
-        }
-
-        private OnFinishBuilder seconds(int seconds) {
-            pauseableMinutesSecondsTimer.setSeconds(seconds);
-            return this;
-        }
-
     }
 
 }

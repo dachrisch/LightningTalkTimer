@@ -23,9 +23,15 @@ public class BackPresenter implements Presenter<BackView>, PauseableMinutesSecon
     }
 
     @Override
-    public void onSecond() {
+    public void onSecond(long millisRemaining) {
         Log.d(TAG, "decrement one second");
-        backModel.decrementOneSecond();
+        int seconds = (int) Math.ceil((Double.valueOf(millisRemaining) / 1000.0) % 60.0);
+        int minutes = (int) Math.floor((Double.valueOf(millisRemaining) / 1000.0) / 60.0);
+        backModel.updateTime(minutes, seconds);
+        displayCountdown();
+    }
+
+    private void displayCountdown() {
         if (backModel.getMinutes() > 0) {
             backView.display(backModel.getMinutes(), backModel.getSeconds());
         } else {
@@ -36,8 +42,8 @@ public class BackPresenter implements Presenter<BackView>, PauseableMinutesSecon
     @Override
     public void onFinish() {
         Log.d(TAG, "finished");
-        backModel.decrementOneSecond();
-        backView.display(0, 0);
+        onSecond(0);
+        backView.blinkScreen();
     }
 
     @Override
@@ -56,6 +62,8 @@ public class BackPresenter implements Presenter<BackView>, PauseableMinutesSecon
         if (null != pauseableMinutesSecondsTimer) {
             if (pauseableMinutesSecondsTimer.isRunning()) {
                 pauseableMinutesSecondsTimer.pause();
+                pauseableMinutesSecondsTimer.setSeconds(backModel.getSeconds());
+                pauseableMinutesSecondsTimer.setMinutes(backModel.getMinutes());
                 backView.pause();
             } else {
                 pauseableMinutesSecondsTimer.resume();

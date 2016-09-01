@@ -22,12 +22,12 @@ public class BackModel {
         return countdownEntity.getSeconds();
     }
 
-    public void decrementOneSecond() {
-        countdownEntity.decrementSeconds(1);
-    }
-
     public void updateCountdownEntity(CountdownEntity countdownEntity) {
         this.countdownEntity.updateWith(countdownEntity);
+    }
+
+    public void updateTime(int minutes, int seconds) {
+        countdownEntity.update(minutes, seconds);
     }
 
     public CountdownEntity getCountdownEntity() {
@@ -41,5 +41,6 @@ public class BackModel {
     public Integer getBackgroundColor() {
         return backgroundColor;
     }
+
 }
 
