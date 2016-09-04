@@ -55,4 +55,8 @@ public class CountdownEntity {
         this.minutes = minutes;
         this.seconds = seconds;
     }
+
+    public int inMillis() {
+        return (minutes * 60 + seconds) * 1000;
+    }
 }

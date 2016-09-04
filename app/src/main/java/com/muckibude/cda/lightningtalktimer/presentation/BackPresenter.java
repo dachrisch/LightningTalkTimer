@@ -3,32 +3,21 @@ package com.muckibude.cda.lightningtalktimer.presentation;
 import android.util.Log;
 
 import com.muckibude.cda.lightningtalktimer.domain.BackModel;
-import com.muckibude.cda.lightningtalktimer.domain.PauseableMinutesSecondsTimer;
+import com.muckibude.cda.lightningtalktimer.domain.PausableCountdownTimer;
 
 import javax.inject.Inject;
 
-public class BackPresenter implements Presenter<BackView>, PauseableMinutesSecondsTimer.OnSecondCallback, PauseableMinutesSecondsTimer.OnFinishCallback {
+public class BackPresenter implements Presenter<BackView> {
     private static final String TAG = "BackPresenter";
     private final BackModel backModel;
     private BackView backView;
 
-    private final PauseableMinutesSecondsTimer pauseableMinutesSecondsTimer;
+    private final PausableCountdownTimer pausableCountdownTimer;
 
     @Inject
-    public BackPresenter(final BackModel backModel, final PauseableMinutesSecondsTimer pauseableMinutesSecondsTimer) {
+    public BackPresenter(final BackModel backModel, final PausableCountdownTimer pausableCountdownTimer) {
         this.backModel = backModel;
-        this.pauseableMinutesSecondsTimer = pauseableMinutesSecondsTimer;
-        this.pauseableMinutesSecondsTimer.setOnSecondsCallback(this);
-        this.pauseableMinutesSecondsTimer.setOnFinishCallback(this);
-    }
-
-    @Override
-    public void onSecond(long millisRemaining) {
-        Log.d(TAG, "decrement one second");
-        int seconds = (int) Math.ceil((Double.valueOf(millisRemaining) / 1000.0) % 60.0);
-        int minutes = (int) Math.floor((Double.valueOf(millisRemaining) / 1000.0) / 60.0);
-        backModel.updateCountdown(minutes, seconds);
-        displayCountdown();
+        this.pausableCountdownTimer = pausableCountdownTimer;
     }
 
     private void displayCountdown() {
@@ -40,40 +29,29 @@ public class BackPresenter implements Presenter<BackView>, PauseableMinutesSecon
     }
 
     @Override
-    public void onFinish() {
-        Log.d(TAG, "finished");
-        onSecond(0);
-        backView.blinkScreen();
-    }
-
-    @Override
     public void setView(BackView view) {
         backView = view;
     }
 
     public void startTimer() {
         Log.d(TAG, "start timer with: " + backModel.getCountdownEntity());
-        pauseableMinutesSecondsTimer.setStartMinutes(backModel.getMinutes());
-        pauseableMinutesSecondsTimer.setStartSeconds(backModel.getSeconds());
-        pauseableMinutesSecondsTimer.start();
+        pausableCountdownTimer.start();
     }
 
     public void toggleTimer() {
-        if (null != pauseableMinutesSecondsTimer) {
-            if (pauseableMinutesSecondsTimer.isRunning()) {
-                pauseableMinutesSecondsTimer.pause();
-                pauseableMinutesSecondsTimer.setStartSeconds(backModel.getSeconds());
-                pauseableMinutesSecondsTimer.setStartMinutes(backModel.getMinutes());
+        if (null != pausableCountdownTimer) {
+            if (pausableCountdownTimer.isRunning()) {
+                pausableCountdownTimer.pause();
                 backView.pause();
             } else {
-                pauseableMinutesSecondsTimer.resume();
+                pausableCountdownTimer.resume();
                 backView.resume();
             }
         }
     }
 
     public void stopTimer() {
-        pauseableMinutesSecondsTimer.cancel();
+        pausableCountdownTimer.pause();
     }
 
     public void applyBackgroundColor() {

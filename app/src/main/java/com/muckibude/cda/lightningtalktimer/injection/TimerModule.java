@@ -3,7 +3,7 @@ package com.muckibude.cda.lightningtalktimer.injection;
 import com.muckibude.cda.lightningtalktimer.data.CountdownEntity;
 import com.muckibude.cda.lightningtalktimer.domain.BackModel;
 import com.muckibude.cda.lightningtalktimer.domain.ColorProvider;
-import com.muckibude.cda.lightningtalktimer.domain.PauseableMinutesSecondsTimer;
+import com.muckibude.cda.lightningtalktimer.domain.PausableCountdownTimer;
 import com.muckibude.cda.lightningtalktimer.ui.BackCountdownDisplayFragment;
 import com.muckibude.cda.lightningtalktimer.ui.FrontCountdownSelectFragment;
 
@@ -36,8 +36,8 @@ public class TimerModule {
     }
 
     @Provides
-    public PauseableMinutesSecondsTimer providesPauseableMinutesSecondsTimer() {
-        return new PauseableMinutesSecondsTimer();
+    public PausableCountdownTimer providesPausableCountdownTimer() {
+        return new PausableCountdownTimer(providesCountdownEntity());
     }
 
     @Singleton
