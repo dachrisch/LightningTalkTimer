@@ -28,7 +28,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class BackCountdownDisplayFragment extends Fragment implements BackView {
-    private static final String TAG = "BackCountdownDisplay";
+    private static final String TAG = BackCountdownDisplayFragment.class.getName();
 
     @Inject
     BackPresenter backPresenter;
@@ -46,6 +46,7 @@ public class BackCountdownDisplayFragment extends Fragment implements BackView {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         DaggerAwareApplication.getAppComponent(getActivity()).inject(this);
+        backPresenter.getFrontArguments(getArguments());
     }
 
 

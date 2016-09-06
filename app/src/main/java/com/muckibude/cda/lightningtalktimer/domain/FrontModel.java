@@ -14,6 +14,7 @@ public class FrontModel {
     private final CountdownEntity countdownEntity;
 
     private ColorProvider colors;
+    private Integer currentColor = 0;
 
     @Inject
     public FrontModel(CountdownEntity minutesSecondsEntity) {
@@ -36,18 +37,19 @@ public class FrontModel {
         return countdownEntity;
     }
 
-    public Integer getNextColor(Integer currentColor) {
-        Integer nextColor = colors.get(colors.indexOf(currentColor) + 1);
-        Log.d(TAG, String.format(Locale.getDefault(), "next color: %d", nextColor));
-        return nextColor;
+    public Integer getNextColor() {
+        this.currentColor = colors.get(colors.indexOf(currentColor) + 1);
+        Log.d(TAG, String.format(Locale.getDefault(), "next color: %d", this.currentColor));
+        return this.currentColor;
     }
 
     @Inject
     public void setColors(ColorProvider colors) {
         this.colors = colors;
+        getNextColor();
     }
 
-    public Integer getFirstColor() {
-        return colors.get(0);
+    public Integer getCurrentColor() {
+        return currentColor;
     }
 }

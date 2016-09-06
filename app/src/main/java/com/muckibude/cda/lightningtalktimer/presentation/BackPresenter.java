@@ -1,31 +1,25 @@
 package com.muckibude.cda.lightningtalktimer.presentation;
 
-import android.util.Log;
+import android.os.Bundle;
 
+import com.muckibude.cda.lightningtalktimer.data.CountdownEntity;
+import com.muckibude.cda.lightningtalktimer.data.EntityChangeListener;
 import com.muckibude.cda.lightningtalktimer.domain.BackModel;
-import com.muckibude.cda.lightningtalktimer.domain.PausableCountdownTimer;
 
 import javax.inject.Inject;
 
-public class BackPresenter implements Presenter<BackView> {
+public class BackPresenter implements Presenter<BackView>, EntityChangeListener<CountdownEntity> {
     private static final String TAG = "BackPresenter";
     private final BackModel backModel;
+    // private final FrontModel frontModel;
     private BackView backView;
+    private CountdownEntity startCountdown;
 
-    private final PausableCountdownTimer pausableCountdownTimer;
 
     @Inject
-    public BackPresenter(final BackModel backModel, final PausableCountdownTimer pausableCountdownTimer) {
+    public BackPresenter(final BackModel backModel) {
         this.backModel = backModel;
-        this.pausableCountdownTimer = pausableCountdownTimer;
-    }
-
-    private void displayCountdown() {
-        if (backModel.getMinutes() > 0) {
-            backView.display(backModel.getMinutes(), backModel.getSeconds());
-        } else {
-            backView.display(backModel.getSeconds());
-        }
+        backModel.registerEntityChangeListener(this);
     }
 
     @Override
@@ -34,27 +28,38 @@ public class BackPresenter implements Presenter<BackView> {
     }
 
     public void startTimer() {
-        Log.d(TAG, "start timer with: " + backModel.getCountdownEntity());
-        pausableCountdownTimer.start();
+        backModel.startCountdown();
     }
 
     public void toggleTimer() {
-        if (null != pausableCountdownTimer) {
-            if (pausableCountdownTimer.isRunning()) {
-                pausableCountdownTimer.pause();
-                backView.pause();
-            } else {
-                pausableCountdownTimer.resume();
-                backView.resume();
-            }
+        if (backModel.toggleTimer()) {
+            backView.resume();
+        } else {
+            backView.pause();
         }
     }
 
     public void stopTimer() {
-        pausableCountdownTimer.pause();
+        backModel.stopTimer();
     }
 
     public void applyBackgroundColor() {
         backView.setBackgroundColor(backModel.getBackgroundColor());
+    }
+
+    @Override
+    public void inform(CountdownEntity changedEntity) {
+        if (changedEntity.getMinutes() > 0) {
+            backView.display(changedEntity.getMinutes(), changedEntity.getSeconds());
+        } else {
+            backView.display(changedEntity.getSeconds());
+        }
+    }
+
+
+    public void getFrontArguments(Bundle arguments) {
+        CountdownEntity startCountdown = (CountdownEntity) arguments.getSerializable("startCountdown");
+        backModel.setStartCountdown(startCountdown);
+        backModel.setBackgroundColor(arguments.getInt("backgroundColor"));
     }
 }

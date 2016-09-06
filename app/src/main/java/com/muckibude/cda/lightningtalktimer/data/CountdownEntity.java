@@ -1,10 +1,13 @@
 package com.muckibude.cda.lightningtalktimer.data;
 
+
+import java.io.Serializable;
 import java.util.Locale;
 
-public class CountdownEntity {
+public class CountdownEntity implements Serializable {
     private int seconds;
     private int minutes;
+    private EntityChangeListener entityChangeListener = new EmptyCountdownEntityChangeListener();
 
     public CountdownEntity(int minutes, int seconds) {
         this.seconds = seconds;
@@ -17,6 +20,7 @@ public class CountdownEntity {
             this.seconds -= 60;
             this.minutes++;
         }
+        entityChangeListener.inform(this);
     }
 
     public int getSeconds() {
@@ -39,24 +43,20 @@ public class CountdownEntity {
                 this.seconds = 0;
             }
         }
+        entityChangeListener.inform(this);
     }
 
-    public void updateWith(CountdownEntity countdownEntity) {
-        this.minutes = countdownEntity.getMinutes();
-        this.seconds = countdownEntity.getSeconds();
-    }
 
     @Override
     public String toString() {
         return String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
     }
 
-    public void update(int minutes, int seconds) {
-        this.minutes = minutes;
-        this.seconds = seconds;
-    }
-
     public int inMillis() {
         return (minutes * 60 + seconds) * 1000;
+    }
+
+    public void registerEntityChangeListener(EntityChangeListener entityChangeListener) {
+        this.entityChangeListener = entityChangeListener;
     }
 }

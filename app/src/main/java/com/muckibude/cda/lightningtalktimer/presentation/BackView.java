@@ -12,4 +12,6 @@ public interface BackView {
     void setBackgroundColor(int backgroundColor);
 
     void blinkScreen();
+
+
 }

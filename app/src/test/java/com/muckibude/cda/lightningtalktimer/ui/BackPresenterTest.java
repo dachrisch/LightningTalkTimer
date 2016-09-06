@@ -1,9 +1,12 @@
 package com.muckibude.cda.lightningtalktimer.ui;
 
+import android.support.annotation.NonNull;
+
 import com.muckibude.cda.lightningtalktimer.data.CountdownEntity;
 import com.muckibude.cda.lightningtalktimer.domain.BackModel;
 import com.muckibude.cda.lightningtalktimer.domain.PausableCountdownTimer;
-import com.muckibude.cda.lightningtalktimer.domain.TickGiver;
+import com.muckibude.cda.lightningtalktimer.domain.PausableCountdownTimerBuilder;
+import com.muckibude.cda.lightningtalktimer.domain.PausableOneSecondCountdownTimer;
 import com.muckibude.cda.lightningtalktimer.presentation.BackPresenter;
 import com.muckibude.cda.lightningtalktimer.presentation.BackView;
 
@@ -17,30 +20,27 @@ public class BackPresenterTest {
     @Test
     public void displayMinutesBigIfAboveOneMinute() {
         BackView backView = mock(BackView.class);
-        PausableCountdownTimer timer = new PausableCountdownTimer(new CountdownEntity(1, 0));
-        timer.setTickGiver(new TickGiver() {
-            @Override
-            public void waitOneSecond() {
-
-            }
-        });
-        BackPresenter backPresenter = new BackPresenter(new BackModel(new CountdownEntity(1, 1)), timer);
+        BackPresenter backPresenter = getBackPresenter(noDelayTimerBuilder(), new CountdownEntity(1, 1));
         backPresenter.setView(backView);
         backPresenter.startTimer();
         verify(backView).display(1, 0);
     }
 
+    @NonNull
+    private PausableCountdownTimerBuilder noDelayTimerBuilder() {
+        return new PausableCountdownTimerBuilder() {
+            @Override
+            public PausableCountdownTimer build(CountdownEntity initialCountdownEntity) {
+                initialCountdownEntity.decrementSeconds(1);
+                return super.build(initialCountdownEntity);
+            }
+        };
+    }
+
     @Test
     public void displaySecondsBigIfBelowOneMinute() {
         BackView backView = mock(BackView.class);
-        PausableCountdownTimer timer = new PausableCountdownTimer(new CountdownEntity(1, 0));
-        timer.setTickGiver(new TickGiver() {
-            @Override
-            public void waitOneSecond() {
-
-            }
-        });
-        BackPresenter backPresenter = new BackPresenter(new BackModel(new CountdownEntity(1, 0)), timer);
+        BackPresenter backPresenter = getBackPresenter(noDelayTimerBuilder(), new CountdownEntity(1, 0));
         backPresenter.setView(backView);
         backPresenter.startTimer();
         verify(backView).display(59);
@@ -48,17 +48,39 @@ public class BackPresenterTest {
 
     @Test
     public void cancelTimerWhenStopTimer() {
-        PausableCountdownTimer timer = mock(PausableCountdownTimer.class);
-        BackPresenter backPresenter = new BackPresenter(new BackModel(new CountdownEntity(1, 0)), timer);
+        final PausableCountdownTimer timer = mock(PausableOneSecondCountdownTimer.class);
+        PausableCountdownTimerBuilder builder = new PausableCountdownTimerBuilder() {
+            @Override
+            public PausableCountdownTimer build(CountdownEntity initialCountdownEntity) {
+                return timer;
+            }
+        };
+
+        BackPresenter backPresenter = getBackPresenter(builder, new CountdownEntity(1, 0));
+        backPresenter.startTimer();
         backPresenter.stopTimer();
         verify(timer).pause();
     }
 
+    @NonNull
+    private BackPresenter getBackPresenter(PausableCountdownTimerBuilder builder, CountdownEntity countdownEntity) {
+        BackModel backModel = new BackModel(builder);
+        backModel.setStartCountdown(countdownEntity);
+        return new BackPresenter(backModel);
+    }
+
     @Test
     public void cancelTimerOnViewDestroyed() {
-        PausableCountdownTimer timer = mock(PausableCountdownTimer.class);
+        final PausableCountdownTimer timer = mock(PausableOneSecondCountdownTimer.class);
+        PausableCountdownTimerBuilder builder = new PausableCountdownTimerBuilder() {
+            @Override
+            public PausableCountdownTimer build(CountdownEntity initialCountdownEntity) {
+                return timer;
+            }
+        };
         BackCountdownDisplayFragment fragment = new BackCountdownDisplayFragment();
-        fragment.backPresenter = new BackPresenter(new BackModel(new CountdownEntity(1, 0)), timer);
+        fragment.backPresenter = getBackPresenter(builder, new CountdownEntity(1, 0));
+        fragment.backPresenter.startTimer();
         fragment.onDestroyView();
         verify(timer).pause();
     }

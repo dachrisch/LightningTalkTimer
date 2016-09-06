@@ -5,5 +5,4 @@ public interface FrontView {
 
     void switchPickerColorTo(Integer color);
 
-    int getCurrentColor();
 }

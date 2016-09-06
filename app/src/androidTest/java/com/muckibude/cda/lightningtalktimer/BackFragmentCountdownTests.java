@@ -49,4 +49,14 @@ public class BackFragmentCountdownTests {
         onView(withId(R.id.small_number_text_view)).check(matches(isDisplayed()));
     }
 
+    @Test
+    public void oneSecondPassedAfterStart() {
+        onView(withId(R.id.minutes)).check(matches(withTextOnView("2")));
+        onView(withId(R.id.seconds)).check(matches(withTextOnView("15")));
+        onView(withId(R.id.startButton)).perform(click());
+        onView(withId(R.id.big_number_text_view)).check(matches(withTextOnView("2")));
+        onView(withId(R.id.small_number_text_view)).check(matches(withTextOnView("14")));
+    }
+
+
 }

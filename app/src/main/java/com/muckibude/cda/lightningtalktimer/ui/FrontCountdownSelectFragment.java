@@ -59,13 +59,12 @@ public class FrontCountdownSelectFragment extends Fragment implements FrontView 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        frontPresenter.setColorFromBackground();
+        frontPresenter.setInitialColor();
     }
 
     @OnClick(R.id.startButton)
     public void startCountdown() {
-        frontPresenter.startCountdown();
-        frontPresenter.setColorForBackground(getCurrentColor());
+        backFragment.setArguments(frontPresenter.getBackArguments());
         getFragmentManager()
                 .beginTransaction()
 
@@ -90,6 +89,7 @@ public class FrontCountdownSelectFragment extends Fragment implements FrontView 
 
                 // Commit the transaction.
                 .commit();
+
     }
 
     @Override
@@ -101,10 +101,5 @@ public class FrontCountdownSelectFragment extends Fragment implements FrontView 
     @Override
     public void switchPickerColorTo(Integer color) {
         ((GradientDrawable) countdownPicker.getBackground()).setColor(color);
-    }
-
-    @Override
-    public int getCurrentColor() {
-        return ((GradientDrawable) countdownPicker.getBackground()).getColor().getDefaultColor();
     }
 }
