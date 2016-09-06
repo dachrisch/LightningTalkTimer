@@ -5,6 +5,8 @@ import android.support.test.espresso.IdlingPolicies;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.muckibude.cda.lightningtalktimer.injection.TestAppComponentRule;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

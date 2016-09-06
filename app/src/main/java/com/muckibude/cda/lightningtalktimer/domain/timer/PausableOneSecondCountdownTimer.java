@@ -1,4 +1,4 @@
-package com.muckibude.cda.lightningtalktimer.domain;
+package com.muckibude.cda.lightningtalktimer.domain.timer;
 
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
@@ -12,37 +12,42 @@ public class PausableOneSecondCountdownTimer implements PausableCountdownTimer {
     private static final String TAG = PausableOneSecondCountdownTimer.class.getName();
     private final CountdownEntity countdownEntity;
     private boolean isRunning = false;
-    CountDownTimer countDownTimer;
+    private CountDownTimer countDownTimer;
+    private OnFinishedListener onFinishedListener;
 
     public PausableOneSecondCountdownTimer(@NonNull CountdownEntity countdownEntity) {
         this.countdownEntity = countdownEntity;
 
     }
 
-
     @Override
     public PausableCountdownTimer start() {
         isRunning = true;
 
-        countDownTimer = new CountDownTimer(countdownEntity.inMillis(), 1000) {
+        countDownTimer = new CountDownTimer(countdownEntity.inMillis(), 333) {
             @Override
-            public void onTick(long l) {
-                onSecond();
+            public void onTick(long millisRemaining) {
+                PausableOneSecondCountdownTimer.this.onTick(millisRemaining);
             }
 
             @Override
             public void onFinish() {
-                onSecond();
+                PausableOneSecondCountdownTimer.this.onTick(0);
+                pause();
+                if (null != onFinishedListener) {
+                    onFinishedListener.informFinished();
+                }
             }
         };
         countDownTimer.start();
         return this;
     }
 
-    protected void onSecond() {
+    protected void onTick(long millisRemaining) {
         if (isRunning) {
-            Log.d(TAG, String.format(Locale.getDefault(), "onSecond: %s", countdownEntity));
-            countdownEntity.decrementSeconds(1);
+            Log.d(TAG, String.format(Locale.getDefault(), "remaining millis: %d", millisRemaining));
+            countdownEntity.updateFromMillis(millisRemaining);
+            Log.d(TAG, String.format(Locale.getDefault(), "onTick: %s", countdownEntity));
         }
     }
 
@@ -62,5 +67,9 @@ public class PausableOneSecondCountdownTimer implements PausableCountdownTimer {
         return isRunning;
     }
 
+    @Override
+    public void registerOnFinishedListener(OnFinishedListener onFinishedListener) {
+        this.onFinishedListener = onFinishedListener;
+    }
 
 }

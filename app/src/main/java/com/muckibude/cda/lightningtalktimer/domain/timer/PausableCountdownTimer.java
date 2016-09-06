@@ -1,4 +1,4 @@
-package com.muckibude.cda.lightningtalktimer.domain;
+package com.muckibude.cda.lightningtalktimer.domain.timer;
 
 public interface PausableCountdownTimer {
     PausableCountdownTimer start();
@@ -8,4 +8,6 @@ public interface PausableCountdownTimer {
     void resume();
 
     boolean isRunning();
+
+    void registerOnFinishedListener(OnFinishedListener onFinishedListener);
 }

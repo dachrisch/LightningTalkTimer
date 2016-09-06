@@ -3,7 +3,7 @@ package com.muckibude.cda.lightningtalktimer.injection;
 import com.muckibude.cda.lightningtalktimer.data.CountdownEntity;
 import com.muckibude.cda.lightningtalktimer.domain.ColorProvider;
 import com.muckibude.cda.lightningtalktimer.domain.FrontModel;
-import com.muckibude.cda.lightningtalktimer.domain.PausableCountdownTimerBuilder;
+import com.muckibude.cda.lightningtalktimer.domain.timer.PausableCountdownTimerBuilder;
 import com.muckibude.cda.lightningtalktimer.ui.BackCountdownDisplayFragment;
 import com.muckibude.cda.lightningtalktimer.ui.FrontCountdownSelectFragment;
 

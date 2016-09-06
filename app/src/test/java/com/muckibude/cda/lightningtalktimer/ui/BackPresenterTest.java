@@ -4,9 +4,9 @@ import android.support.annotation.NonNull;
 
 import com.muckibude.cda.lightningtalktimer.data.CountdownEntity;
 import com.muckibude.cda.lightningtalktimer.domain.BackModel;
-import com.muckibude.cda.lightningtalktimer.domain.PausableCountdownTimer;
-import com.muckibude.cda.lightningtalktimer.domain.PausableCountdownTimerBuilder;
-import com.muckibude.cda.lightningtalktimer.domain.PausableOneSecondCountdownTimer;
+import com.muckibude.cda.lightningtalktimer.domain.timer.PausableCountdownTimer;
+import com.muckibude.cda.lightningtalktimer.domain.timer.PausableCountdownTimerBuilder;
+import com.muckibude.cda.lightningtalktimer.domain.timer.PausableOneSecondCountdownTimer;
 import com.muckibude.cda.lightningtalktimer.presentation.BackPresenter;
 import com.muckibude.cda.lightningtalktimer.presentation.BackView;
 

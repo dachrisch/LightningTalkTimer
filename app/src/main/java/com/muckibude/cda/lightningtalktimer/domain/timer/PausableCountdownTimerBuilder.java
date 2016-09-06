@@ -1,4 +1,4 @@
-package com.muckibude.cda.lightningtalktimer.domain;
+package com.muckibude.cda.lightningtalktimer.domain.timer;
 
 import com.muckibude.cda.lightningtalktimer.data.CountdownEntity;
 

@@ -1,4 +1,4 @@
-package com.muckibude.cda.lightningtalktimer.domain;
+package com.muckibude.cda.lightningtalktimer.domain.timer;
 
 public class NotStartableCountdownTimer implements PausableCountdownTimer {
     @Override
@@ -19,5 +19,10 @@ public class NotStartableCountdownTimer implements PausableCountdownTimer {
     @Override
     public boolean isRunning() {
         return false;
+    }
+
+    @Override
+    public void registerOnFinishedListener(OnFinishedListener onFinishedListener) {
+        // pass
     }
 }

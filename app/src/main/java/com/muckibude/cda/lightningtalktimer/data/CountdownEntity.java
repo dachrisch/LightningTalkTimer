@@ -59,4 +59,22 @@ public class CountdownEntity implements Serializable {
     public void registerEntityChangeListener(EntityChangeListener entityChangeListener) {
         this.entityChangeListener = entityChangeListener;
     }
+
+    public void updateFromMillis(long millisRemaining) {
+        minutes = ((int) millisRemaining) / 1000 / 60;
+        seconds = (int) (Math.ceil(Double.valueOf((int) millisRemaining) / 1000.0) % 60);
+        entityChangeListener.inform(this);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof CountdownEntity)) {
+            return false;
+        }
+        CountdownEntity otherCountdownEntity = ((CountdownEntity) other);
+        if (otherCountdownEntity.minutes != this.minutes) {
+            return false;
+        }
+        return otherCountdownEntity.seconds == this.seconds;
+    }
 }

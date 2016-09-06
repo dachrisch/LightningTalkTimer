@@ -4,6 +4,10 @@ import android.util.Log;
 
 import com.muckibude.cda.lightningtalktimer.data.CountdownEntity;
 import com.muckibude.cda.lightningtalktimer.data.EntityChangeListener;
+import com.muckibude.cda.lightningtalktimer.domain.timer.NotStartableCountdownTimer;
+import com.muckibude.cda.lightningtalktimer.domain.timer.OnFinishedListener;
+import com.muckibude.cda.lightningtalktimer.domain.timer.PausableCountdownTimer;
+import com.muckibude.cda.lightningtalktimer.domain.timer.PausableCountdownTimerBuilder;
 
 import javax.inject.Inject;
 
@@ -13,9 +17,11 @@ public class BackModel {
     private Integer backgroundColor = 0;
     private final PausableCountdownTimerBuilder pausableCountdownTimerBuilder;
     private PausableCountdownTimer countdownTimer = new NotStartableCountdownTimer();
-    private EntityChangeListener entityChangeListener;
-
     private CountdownEntity startCountdown;
+
+    private EntityChangeListener entityChangeListener;
+    private OnFinishedListener onFinishedListener;
+
 
     @Inject
     public BackModel(PausableCountdownTimerBuilder pausableCountdownTimerBuilder) {
@@ -36,7 +42,9 @@ public class BackModel {
 
         CountdownEntity runningCountdown = new CountdownEntity(startCountdown.getMinutes(), startCountdown.getSeconds());
         runningCountdown.registerEntityChangeListener(entityChangeListener);
+
         countdownTimer = pausableCountdownTimerBuilder.build(runningCountdown);
+        countdownTimer.registerOnFinishedListener(onFinishedListener);
 
         countdownTimer.start();
     }
@@ -65,6 +73,10 @@ public class BackModel {
 
     public void setStartCountdown(CountdownEntity startCountdown) {
         this.startCountdown = startCountdown;
+    }
+
+    public void registerOnFinishedListener(OnFinishedListener onFinishedListener) {
+        this.onFinishedListener = onFinishedListener;
     }
 }
 

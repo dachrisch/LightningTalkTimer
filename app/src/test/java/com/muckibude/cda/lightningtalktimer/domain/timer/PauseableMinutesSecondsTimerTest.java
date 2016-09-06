@@ -1,4 +1,4 @@
-package com.muckibude.cda.lightningtalktimer.domain;
+package com.muckibude.cda.lightningtalktimer.domain.timer;
 
 import com.muckibude.cda.lightningtalktimer.data.CountdownEntity;
 
@@ -10,22 +10,13 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class PauseableMinutesSecondsTimerTest {
 
     @Test
-    public void whenTimerStartsItRunsTillEnd() {
-        final CountdownEntity countdownEntity = new CountdownEntity(1, 0);
-        PausableCountdownTimer countdownTimer = new PausableOneSecondCountdownTimer(countdownEntity);
-        countdownTimer.start();
-        assertThat(countdownEntity.getMinutes(), is(0));
-        assertThat(countdownEntity.getSeconds(), is(0));
-    }
-
-    @Test
     public void everySecondEntityIsUpdated() {
         final CountdownEntity countdownEntity = new CountdownEntity(1, 0);
         PausableOneSecondCountdownTimer countdownTimer = new PausableOneSecondCountdownTimer(countdownEntity);
         countdownTimer.resume();
-        countdownTimer.onSecond();
+        countdownTimer.onTick(59 * 1000);
         assertThat(countdownEntity.getSeconds(), is(59));
-        countdownTimer.onSecond();
+        countdownTimer.onTick(58 * 1000);
         assertThat(countdownEntity.getSeconds(), is(58));
     }
 
@@ -34,14 +25,20 @@ public class PauseableMinutesSecondsTimerTest {
         final CountdownEntity countdownEntity = new CountdownEntity(1, 0);
         PausableOneSecondCountdownTimer countdownTimer = new PausableOneSecondCountdownTimer(countdownEntity);
         countdownTimer.resume();
-        countdownTimer.onSecond();
+        countdownTimer.onTick(59 * 1000);
         assertThat(countdownEntity.getSeconds(), is(59));
         countdownTimer.pause();
-        countdownTimer.onSecond();
+        countdownTimer.onTick(59 * 1000);
         assertThat(countdownEntity.getSeconds(), is(59));
         countdownTimer.resume();
-        countdownTimer.onSecond();
+        countdownTimer.onTick(58 * 1000);
         assertThat(countdownEntity.getSeconds(), is(58));
     }
 
+    @Test
+    public void correctRounding() {
+        CountdownEntity countdownEntity = new CountdownEntity(1, 0);
+        countdownEntity.updateFromMillis(14579);
+        assertThat(countdownEntity, is(new CountdownEntity(0, 15)));
+    }
 }

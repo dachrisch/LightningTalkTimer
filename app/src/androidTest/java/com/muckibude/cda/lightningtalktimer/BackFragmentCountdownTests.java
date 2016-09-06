@@ -4,6 +4,8 @@ import android.support.test.espresso.NoMatchingViewException;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.muckibude.cda.lightningtalktimer.injection.TestAppComponentRule;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,10 +56,11 @@ public class BackFragmentCountdownTests {
     }
 
     @Test
-    public void oneSecondPassedAfterStart() {
+    public void oneSecondPassedAfterStart() throws InterruptedException {
         onView(withId(R.id.minutes)).check(matches(withTextOnView("2")));
         onView(withId(R.id.seconds)).check(matches(withTextOnView("15")));
         onView(withId(R.id.startButton)).perform(click());
+        Thread.sleep(1000);
         onView(withId(R.id.big_number_text_view)).check(matches(withTextOnView("2")));
         onView(withId(R.id.small_number_text_view)).check(matches(withTextOnView("14")));
     }
