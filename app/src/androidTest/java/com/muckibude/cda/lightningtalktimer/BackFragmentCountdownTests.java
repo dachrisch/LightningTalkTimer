@@ -22,6 +22,10 @@ public class BackFragmentCountdownTests {
     public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
             MainActivity.class);
 
+    @Rule
+    public final TestAppComponentRule componentRule = new TestAppComponentRule();
+
+
     @Test(expected = NoMatchingViewException.class)
     public void backFragmentBigNumberViewNotVisibleOnStart() {
         onView(withId(R.id.big_number_text_view)).check(matches(isDisplayed()));

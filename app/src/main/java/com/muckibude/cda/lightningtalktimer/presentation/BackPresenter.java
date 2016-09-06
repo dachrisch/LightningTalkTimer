@@ -13,7 +13,6 @@ public class BackPresenter implements Presenter<BackView>, EntityChangeListener<
     private final BackModel backModel;
     // private final FrontModel frontModel;
     private BackView backView;
-    private CountdownEntity startCountdown;
 
 
     @Inject
@@ -58,8 +57,9 @@ public class BackPresenter implements Presenter<BackView>, EntityChangeListener<
 
 
     public void getFrontArguments(Bundle arguments) {
+        backModel.setBackgroundColor(arguments.getInt("backgroundColor"));
         CountdownEntity startCountdown = (CountdownEntity) arguments.getSerializable("startCountdown");
         backModel.setStartCountdown(startCountdown);
-        backModel.setBackgroundColor(arguments.getInt("backgroundColor"));
+        inform(startCountdown);
     }
 }

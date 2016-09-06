@@ -46,7 +46,6 @@ public class BackCountdownDisplayFragment extends Fragment implements BackView {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         DaggerAwareApplication.getAppComponent(getActivity()).inject(this);
-        backPresenter.getFrontArguments(getArguments());
     }
 
 
@@ -63,7 +62,7 @@ public class BackCountdownDisplayFragment extends Fragment implements BackView {
         backPresenter.setView(this);
         // http://stackoverflow.com/questions/6253528/font-size-too-large-to-fit-in-cache
         bigNumberView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-
+        backPresenter.getFrontArguments(getArguments());
         backPresenter.startTimer();
     }
 

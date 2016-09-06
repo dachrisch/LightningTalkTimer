@@ -32,7 +32,7 @@ public class PausableOneSecondCountdownTimer implements PausableCountdownTimer {
 
             @Override
             public void onFinish() {
-
+                onSecond();
             }
         };
         countDownTimer.start();

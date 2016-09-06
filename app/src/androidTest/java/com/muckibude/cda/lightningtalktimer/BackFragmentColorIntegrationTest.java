@@ -18,6 +18,8 @@ public class BackFragmentColorIntegrationTest {
     @Rule
     public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
             MainActivity.class);
+    @Rule
+    public final TestAppComponentRule componentRule = new TestAppComponentRule();
 
     @Test
     public void backgroundColorTakenFromFrontFragment() {

@@ -26,6 +26,8 @@ public class FrontFragmentSwipeIntegrationTest {
     @Rule
     public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
             MainActivity.class);
+    @Rule
+    public final TestAppComponentRule componentRule = new TestAppComponentRule();
 
     @Before
     public void setIdleTimes() {
