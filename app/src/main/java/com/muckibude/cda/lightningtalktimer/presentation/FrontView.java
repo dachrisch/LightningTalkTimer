@@ -5,4 +5,5 @@ public interface FrontView {
 
     void switchPickerColorTo(Integer color);
 
+    void display(int minutes);
 }

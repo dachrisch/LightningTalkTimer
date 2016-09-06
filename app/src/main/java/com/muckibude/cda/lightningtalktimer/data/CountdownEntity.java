@@ -7,7 +7,7 @@ import java.util.Locale;
 public class CountdownEntity implements Serializable {
     private int seconds;
     private int minutes;
-    private EntityChangeListener entityChangeListener = new EmptyCountdownEntityChangeListener();
+    private EntityChangeListener<CountdownEntity> entityChangeListener = new EmptyCountdownEntityChangeListener();
 
     public CountdownEntity(int minutes, int seconds) {
         this.seconds = seconds;
@@ -20,7 +20,7 @@ public class CountdownEntity implements Serializable {
             this.seconds -= 60;
             this.minutes++;
         }
-        entityChangeListener.inform(this);
+        informChanged();
     }
 
     public int getSeconds() {
@@ -43,7 +43,7 @@ public class CountdownEntity implements Serializable {
                 this.seconds = 0;
             }
         }
-        entityChangeListener.inform(this);
+        informChanged();
     }
 
 
@@ -56,14 +56,20 @@ public class CountdownEntity implements Serializable {
         return (minutes * 60 + seconds) * 1000;
     }
 
-    public void registerEntityChangeListener(EntityChangeListener entityChangeListener) {
+    public void registerEntityChangeListener(EntityChangeListener<CountdownEntity> entityChangeListener) {
         this.entityChangeListener = entityChangeListener;
     }
 
     public void updateFromMillis(long millisRemaining) {
-        minutes = ((int) millisRemaining) / 1000 / 60;
-        seconds = (int) (Math.ceil(Double.valueOf((int) millisRemaining) / 1000.0) % 60);
-        entityChangeListener.inform(this);
+        minutes = (int) (Math.ceil(Double.valueOf(millisRemaining) / 1000.0) / 60);
+        seconds = (int) (Math.ceil(Double.valueOf(millisRemaining) / 1000.0) % 60);
+        informChanged();
+    }
+
+    private void informChanged() {
+        if (null != entityChangeListener) {
+            entityChangeListener.inform(this);
+        }
     }
 
     @Override
@@ -72,9 +78,6 @@ public class CountdownEntity implements Serializable {
             return false;
         }
         CountdownEntity otherCountdownEntity = ((CountdownEntity) other);
-        if (otherCountdownEntity.minutes != this.minutes) {
-            return false;
-        }
-        return otherCountdownEntity.seconds == this.seconds;
+        return (otherCountdownEntity.minutes == this.minutes) && (otherCountdownEntity.seconds == this.seconds);
     }
 }

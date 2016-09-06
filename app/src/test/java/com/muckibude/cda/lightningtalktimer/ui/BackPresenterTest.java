@@ -86,4 +86,14 @@ public class BackPresenterTest {
     }
 
 
+    @Test
+    public void lastSecondOfAMinuteIsDisplayedAsMinuteWithZeroSeconds() {
+        BackView backView = mock(BackView.class);
+        CountdownEntity countdownEntity = new CountdownEntity(1, 1);
+        countdownEntity.updateFromMillis(60687);
+        BackPresenter backPresenter = getBackPresenter(noDelayTimerBuilder(), countdownEntity);
+        backPresenter.setView(backView);
+        backPresenter.startTimer();
+        verify(backView).display(1, 0);
+    }
 }

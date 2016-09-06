@@ -3,6 +3,7 @@ package com.muckibude.cda.lightningtalktimer.domain;
 import android.util.Log;
 
 import com.muckibude.cda.lightningtalktimer.data.CountdownEntity;
+import com.muckibude.cda.lightningtalktimer.data.EntityChangeListener;
 
 import java.util.Locale;
 
@@ -51,5 +52,9 @@ public class FrontModel {
 
     public Integer getCurrentColor() {
         return currentColor;
+    }
+
+    public void registerEntityChangeListener(EntityChangeListener<CountdownEntity> entityChangeListener) {
+        countdownEntity.registerEntityChangeListener(entityChangeListener);
     }
 }

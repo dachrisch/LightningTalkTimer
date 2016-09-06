@@ -40,7 +40,8 @@ public class OnUpDownListener implements View.OnTouchListener {
                 break;
             case MotionEvent.ACTION_UP:
                 if (shouldAnimate(motionEvent)) {
-                    toggleTimer(view, motionEvent);
+                    toggleTimer(motionEvent);
+                    rebaseView(view);
                 } else {
                     changeColor();
                 }
@@ -51,6 +52,11 @@ public class OnUpDownListener implements View.OnTouchListener {
         return true;
     }
 
+    private void rebaseView(View view) {
+        Log.d(TAG, String.format("resetting to original position(%f)", viewPosition));
+        view.animate().y(viewPosition).setDuration(5).start();
+    }
+
     private boolean shouldAnimate(MotionEvent motionEvent) {
         return Math.abs(motionEvent.getRawY() - firstDownPosition) > MOVE_THRESHOLD;
     }
@@ -59,15 +65,14 @@ public class OnUpDownListener implements View.OnTouchListener {
         frontPresenter.toggleColor();
     }
 
-    private void toggleTimer(View view, MotionEvent motionEvent) {
+    private void toggleTimer(MotionEvent motionEvent) {
         boolean up = Math.signum(motionEvent.getRawY() - firstDownPosition) < 0;
         if (up) {
             frontPresenter.increase15Seconds();
         } else {
             frontPresenter.decrease15Seconds();
         }
-        Log.d(TAG, String.format("resetting to original position(%f)", viewPosition));
-        view.animate().y(viewPosition).setDuration(5).start();
+
     }
 
     private void animateView(View view, MotionEvent motionEvent) {

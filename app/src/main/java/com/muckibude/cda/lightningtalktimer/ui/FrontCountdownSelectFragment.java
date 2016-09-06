@@ -94,12 +94,20 @@ public class FrontCountdownSelectFragment extends Fragment implements FrontView 
 
     @Override
     public void display(int minutes, int seconds) {
-        secondsView.setText(String.format(Locale.getDefault(), "%02d", seconds));
         minutesView.setText(String.format(Locale.getDefault(), "%d", minutes));
+        secondsView.setText(String.format(Locale.getDefault(), "%02d", seconds));
+        secondsView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void display(int minutes) {
+        minutesView.setText(String.format(Locale.getDefault(), "%d", minutes));
+        secondsView.setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void switchPickerColorTo(Integer color) {
         ((GradientDrawable) countdownPicker.getBackground()).setColor(color);
     }
+
 }

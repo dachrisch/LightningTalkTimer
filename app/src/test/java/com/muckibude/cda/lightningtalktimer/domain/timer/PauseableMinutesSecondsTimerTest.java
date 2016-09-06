@@ -36,9 +36,16 @@ public class PauseableMinutesSecondsTimerTest {
     }
 
     @Test
-    public void correctRounding() {
-        CountdownEntity countdownEntity = new CountdownEntity(1, 0);
+    public void near15SecondsIsRoundedTo15Seconds() {
+        CountdownEntity countdownEntity = new CountdownEntity(0, 0);
         countdownEntity.updateFromMillis(14579);
         assertThat(countdownEntity, is(new CountdownEntity(0, 15)));
+    }
+
+    @Test
+    public void nearMinuteisRoundedToNextMinute() {
+        CountdownEntity countdownEntity = new CountdownEntity(0, 0);
+        countdownEntity.updateFromMillis(59687);
+        assertThat(countdownEntity, is(new CountdownEntity(1, 0)));
     }
 }

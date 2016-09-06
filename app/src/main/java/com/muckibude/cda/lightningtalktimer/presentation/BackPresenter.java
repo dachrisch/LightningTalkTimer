@@ -1,6 +1,7 @@
 package com.muckibude.cda.lightningtalktimer.presentation;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.muckibude.cda.lightningtalktimer.data.CountdownEntity;
 import com.muckibude.cda.lightningtalktimer.data.EntityChangeListener;
@@ -66,6 +67,7 @@ public class BackPresenter implements Presenter<BackView>, EntityChangeListener<
 
     @Override
     public void informFinished() {
+        Log.d(TAG, "informFinished");
         backView.blinkScreen();
     }
 }

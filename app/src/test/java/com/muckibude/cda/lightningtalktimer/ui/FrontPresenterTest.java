@@ -45,8 +45,20 @@ public class FrontPresenterTest {
         presenter.decrease15Seconds();
         presenter.decrease15Seconds();
         presenter.decrease15Seconds();
-        assertThat(secondsEntity.getMinutes(), is(1));
-        assertThat(secondsEntity.getSeconds(), is(15));
+        assertThat(secondsEntity, is(new CountdownEntity(1, 15)));
+
+    }
+
+    @Test
+    public void above10MinutesMinutesAreDisplayed() {
+        FrontView view = mock(FrontView.class);
+        CountdownEntity secondsEntity = new CountdownEntity(9, 45);
+        FrontPresenter presenter = createFrontPresenter(secondsEntity);
+        presenter.setView(view);
+        verify(view).display(9, 45);
+        presenter.increase15Seconds();
+        assertThat(secondsEntity, is(new CountdownEntity(10, 0)));
+        verify(view).display(10);
     }
 
     @Test
