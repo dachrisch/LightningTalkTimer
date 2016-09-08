@@ -14,6 +14,7 @@ import com.muckibude.cda.lightningtalktimer.R;
 import com.muckibude.cda.lightningtalktimer.injection.DaggerAwareApplication;
 import com.muckibude.cda.lightningtalktimer.presentation.FrontPresenter;
 import com.muckibude.cda.lightningtalktimer.presentation.FrontView;
+import com.muckibude.cda.lightningtalktimer.ui.gestures.OnUpDownListener;
 
 import java.util.Locale;
 
@@ -36,6 +37,8 @@ public class FrontCountdownSelectFragment extends Fragment implements FrontView 
     TextView secondsView;
     @BindView(R.id.countdownPicker)
     LinearLayout countdownPicker;
+    @Inject
+    OnUpDownListener onUpDownListener;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,7 +56,8 @@ public class FrontCountdownSelectFragment extends Fragment implements FrontView 
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
         frontPresenter.setView(this);
-        countdownPicker.setOnTouchListener(new OnUpDownListener(frontPresenter));
+        onUpDownListener.setFrontPresenter(frontPresenter);
+        countdownPicker.setOnTouchListener(onUpDownListener);
     }
 
     @Override
