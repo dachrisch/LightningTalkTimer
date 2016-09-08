@@ -1,5 +1,6 @@
 package com.muckibude.cda.lightningtalktimer;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -36,6 +37,7 @@ public class BackFragmentVariableRunTest {
     private CountdownEntity minutesSecondsEntity;
 
     @Before
+    @SuppressLint({"ValidFragment"})
     public void mockModel() {
         MockAppModule mockAppModule = componentRule.getMockAppModule();
 
