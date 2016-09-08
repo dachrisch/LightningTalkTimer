@@ -9,7 +9,7 @@ import javax.inject.Inject;
 
 import static android.view.View.OnTouchListener;
 
-public class OnUpDownListener implements OnTouchListener {
+public class OnInteractionListener implements OnTouchListener {
 
     private ViewActionBuilder viewActionBuilder;
 
@@ -34,7 +34,7 @@ public class OnUpDownListener implements OnTouchListener {
     }
 
     @Inject
-    public OnUpDownListener(ViewActionBuilder viewActionBuilder) {
+    public OnInteractionListener(ViewActionBuilder viewActionBuilder) {
         this.viewActionBuilder = viewActionBuilder;
     }
 

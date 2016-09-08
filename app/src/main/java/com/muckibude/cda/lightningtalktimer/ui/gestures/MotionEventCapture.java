@@ -5,6 +5,7 @@ import android.view.MotionEvent;
 public class MotionEventCapture {
 
     private final float rawX;
+    private int action;
 
     public float getRawY() {
         return rawY;
@@ -19,9 +20,14 @@ public class MotionEventCapture {
     private MotionEventCapture(MotionEvent motionEvent) {
         this.rawX = motionEvent.getRawX();
         rawY = motionEvent.getRawY();
+        action = motionEvent.getAction();
     }
 
     public static MotionEventCapture captureMotionEvent(MotionEvent motionEvent) {
         return new MotionEventCapture(motionEvent);
+    }
+
+    public int getAction() {
+        return action;
     }
 }

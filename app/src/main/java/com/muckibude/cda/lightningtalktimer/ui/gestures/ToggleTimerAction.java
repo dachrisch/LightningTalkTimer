@@ -3,11 +3,12 @@ package com.muckibude.cda.lightningtalktimer.ui.gestures;
 import com.muckibude.cda.lightningtalktimer.presentation.FrontPresenter;
 
 public class ToggleTimerAction extends BaseViewAction {
-    private static final Double MOVE_THRESHOLD = 5.0;
+
     private FrontPresenter frontPresenter;
 
-    public ToggleTimerAction(ViewCapture onDownView, MotionEventCapture onDownMotionEvent) {
+    public ToggleTimerAction(ViewCapture onDownView, MotionEventCapture onDownMotionEvent, FrontPresenter frontPresenter) {
         super(onDownView, onDownMotionEvent);
+        this.frontPresenter = frontPresenter;
     }
 
     @Override
@@ -19,7 +20,4 @@ public class ToggleTimerAction extends BaseViewAction {
         }
     }
 
-    public void setFrontPresenter(FrontPresenter frontPresenter) {
-        this.frontPresenter = frontPresenter;
-    }
 }
