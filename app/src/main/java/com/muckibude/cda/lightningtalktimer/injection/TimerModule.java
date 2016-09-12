@@ -6,7 +6,7 @@ import com.muckibude.cda.lightningtalktimer.domain.FrontModel;
 import com.muckibude.cda.lightningtalktimer.domain.timer.PausableCountdownTimerBuilder;
 import com.muckibude.cda.lightningtalktimer.ui.BackCountdownDisplayFragment;
 import com.muckibude.cda.lightningtalktimer.ui.FrontCountdownSelectFragment;
-import com.muckibude.cda.lightningtalktimer.ui.gestures.ViewActionBuilder;
+import com.muckibude.cda.lightningtalktimer.ui.gestures.OnInteractionListener;
 
 import dagger.Module;
 import dagger.Provides;
@@ -36,7 +36,7 @@ public class TimerModule {
     }
 
     @Provides
-    public ViewActionBuilder providesViewActionBuilder() {
-        return new ViewActionBuilder();
+    public OnInteractionListener providesOnInteractionListener() {
+        return new OnInteractionListener();
     }
 }

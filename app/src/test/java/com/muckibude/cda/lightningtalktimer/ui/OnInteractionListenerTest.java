@@ -6,11 +6,11 @@ import android.view.ViewPropertyAnimator;
 
 import com.muckibude.cda.lightningtalktimer.presentation.FrontPresenter;
 import com.muckibude.cda.lightningtalktimer.ui.gestures.OnInteractionListener;
-import com.muckibude.cda.lightningtalktimer.ui.gestures.ViewActionBuilder;
 
 import org.junit.Test;
 
-import static com.muckibude.cda.lightningtalktimer.ui.ViewActionBuilderTest.mockViewPropertyAnimator;
+import static org.mockito.Matchers.anyFloat;
+import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -19,13 +19,19 @@ import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 public class OnInteractionListenerTest {
+    public static ViewPropertyAnimator mockViewPropertyAnimator(View initialView) {
+        ViewPropertyAnimator viewPropertyAnimator = mock(ViewPropertyAnimator.class);
+        when(initialView.animate()).thenReturn(viewPropertyAnimator);
+        when(viewPropertyAnimator.y(anyFloat())).thenReturn(viewPropertyAnimator);
+        when(viewPropertyAnimator.setDuration(anyLong())).thenReturn(viewPropertyAnimator);
+        return viewPropertyAnimator;
+    }
 
     @Test
     public void onDownMovementSecondsAreDecremented() {
-        ViewActionBuilder viewActionBuilder = new ViewActionBuilder();
         FrontPresenter frontPresenter = mock(FrontPresenter.class);
-        viewActionBuilder.setFrontPresenter(frontPresenter);
-        OnInteractionListener upDownListener = new OnInteractionListener(viewActionBuilder);
+        OnInteractionListener upDownListener = new OnInteractionListener();
+        upDownListener.setFrontPresenter(frontPresenter);
         MotionEvent initialMotionEvent = mock(MotionEvent.class);
         View initialView = mock(View.class);
         ViewPropertyAnimator viewPropertyAnimator = mockViewPropertyAnimator(initialView);
@@ -45,10 +51,9 @@ public class OnInteractionListenerTest {
 
     @Test
     public void onUpMovementSecondsAreIncremented() {
-        ViewActionBuilder viewActionBuilder = new ViewActionBuilder();
         FrontPresenter frontPresenter = mock(FrontPresenter.class);
-        viewActionBuilder.setFrontPresenter(frontPresenter);
-        OnInteractionListener upDownListener = new OnInteractionListener(viewActionBuilder);
+        OnInteractionListener upDownListener = new OnInteractionListener();
+        upDownListener.setFrontPresenter(frontPresenter);
         MotionEvent initialMotionEvent = mock(MotionEvent.class);
         View initialView = mock(View.class);
         ViewPropertyAnimator viewPropertyAnimator = mockViewPropertyAnimator(initialView);
@@ -68,10 +73,8 @@ public class OnInteractionListenerTest {
 
     @Test
     public void onNoMovementTimerIsUnchanged() {
-        ViewActionBuilder viewActionBuilder = new ViewActionBuilder();
         FrontPresenter frontPresenter = mock(FrontPresenter.class);
-        viewActionBuilder.setFrontPresenter(frontPresenter);
-        OnInteractionListener upDownListener = new OnInteractionListener(viewActionBuilder);
+        OnInteractionListener upDownListener = new OnInteractionListener();
         MotionEvent initialMotionEvent = mock(MotionEvent.class);
         View initialView = mock(View.class);
         ViewPropertyAnimator viewPropertyAnimator = mockViewPropertyAnimator(initialView);
@@ -93,10 +96,9 @@ public class OnInteractionListenerTest {
 
     @Test
     public void whenSimpleClickedColorIsChanged() {
-        ViewActionBuilder viewActionBuilder = new ViewActionBuilder();
         FrontPresenter frontPresenter = mock(FrontPresenter.class);
-        viewActionBuilder.setFrontPresenter(frontPresenter);
-        OnInteractionListener upDownListener = new OnInteractionListener(viewActionBuilder);
+        OnInteractionListener upDownListener = new OnInteractionListener();
+        upDownListener.setFrontPresenter(frontPresenter);
         MotionEvent initialMotionEvent = mock(MotionEvent.class);
         View initialView = mock(View.class);
         when(initialMotionEvent.getAction()).thenReturn(MotionEvent.ACTION_DOWN);
@@ -111,10 +113,9 @@ public class OnInteractionListenerTest {
 
     @Test
     public void whenSecondMovementStartsActionIsReset() {
-        ViewActionBuilder viewActionBuilder = new ViewActionBuilder();
         FrontPresenter frontPresenter = mock(FrontPresenter.class);
-        viewActionBuilder.setFrontPresenter(frontPresenter);
-        OnInteractionListener upDownListener = new OnInteractionListener(viewActionBuilder);
+        OnInteractionListener upDownListener = new OnInteractionListener();
+        upDownListener.setFrontPresenter(frontPresenter);
         MotionEvent initialMotionEvent = mock(MotionEvent.class);
         View initialView = mock(View.class);
         ViewPropertyAnimator viewPropertyAnimator = mockViewPropertyAnimator(initialView);

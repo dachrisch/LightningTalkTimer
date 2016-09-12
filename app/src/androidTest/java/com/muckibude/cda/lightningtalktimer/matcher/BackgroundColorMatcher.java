@@ -1,9 +1,11 @@
 package com.muckibude.cda.lightningtalktimer.matcher;
 
+import android.annotation.TargetApi;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.util.Log;
 import android.view.View;
 
@@ -25,6 +27,7 @@ public class BackgroundColorMatcher extends TypeSafeMatcher<View> {
         this.expectedColor = Color.parseColor(rgbColor);
     }
 
+    @TargetApi(Build.VERSION_CODES.N)
     @Override
     protected boolean matchesSafely(View target) {
         Drawable drawable = target.getBackground();
