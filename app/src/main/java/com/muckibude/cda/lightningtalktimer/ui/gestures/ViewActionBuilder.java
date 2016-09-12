@@ -41,9 +41,7 @@ public class ViewActionBuilder {
         Log.d(TAG, String.format(Locale.getDefault(), "withActionUp = {actualMotionEvent: %f, %f}",
                                  actualMotionEvent.getRawX(), actualMotionEvent.getRawY()));
         if (Math.abs(motionEventMovedDelta(actualMotionEvent)) > MOVE_THRESHOLD) {
-            ToggleTimerAction toggleTimerAction = new ToggleTimerAction(onDownView, onDownMotionEvent, frontPresenter);
-
-            viewAction = toggleTimerAction;
+            viewAction = new ToggleTimerAction(onDownView, onDownMotionEvent, frontPresenter);
             viewAction.and(new RebaseViewAction(onDownView));
         } else {
             viewAction = new ChangeColorAction(frontPresenter);

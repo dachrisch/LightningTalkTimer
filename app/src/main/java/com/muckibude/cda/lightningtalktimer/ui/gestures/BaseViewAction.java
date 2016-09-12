@@ -21,7 +21,7 @@ public abstract class BaseViewAction implements ViewAction {
         }
     }
 
-    protected abstract void onAction(MotionEventCapture capture);
+    protected abstract void onAction(MotionEventCapture motionEventCapture);
 
     public void and(ViewAction viewAction) {
         this.nextViewAction = viewAction;
