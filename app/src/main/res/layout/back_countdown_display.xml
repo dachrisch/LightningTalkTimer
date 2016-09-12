@@ -8,12 +8,13 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginTop="-60dp"
         android:textSize="@dimen/countdown_big_text_size"
         android:id="@+id/big_number_text_view"
         android:textColor="#ffffff"
+        android:scaleY="1.8"
         android:text="2"
         android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:layout_above="@+id/small_number_text_view"
         />
 
