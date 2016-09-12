@@ -19,7 +19,7 @@ public class BackModel {
     private PausableCountdownTimer countdownTimer = new NotStartableCountdownTimer();
     private CountdownEntity startCountdown;
 
-    private EntityChangeListener entityChangeListener;
+    private EntityChangeListener<CountdownEntity> entityChangeListener;
     private OnFinishedListener onFinishedListener;
 
 
@@ -67,7 +67,7 @@ public class BackModel {
         }
     }
 
-    public void registerEntityChangeListener(EntityChangeListener entityChangeListener) {
+    public void registerEntityChangeListener(EntityChangeListener<CountdownEntity> entityChangeListener) {
         this.entityChangeListener = entityChangeListener;
     }
 
