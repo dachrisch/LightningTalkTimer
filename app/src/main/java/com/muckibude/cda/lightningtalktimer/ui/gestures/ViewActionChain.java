@@ -3,15 +3,17 @@ package com.muckibude.cda.lightningtalktimer.ui.gestures;
 import android.view.MotionEvent;
 import android.view.View;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Set;
+
+import javax.inject.Inject;
 
 public class ViewActionChain {
 
-    private final Collection<ViewAction> chain = new ArrayList<>();
+    private final Set<ViewAction> chain;
 
-    public void add(ViewAction viewAction) {
-        chain.add(viewAction);
+    @Inject
+    public ViewActionChain(Set<ViewAction> chain) {
+        this.chain = chain;
     }
 
     public void onAction(View view, MotionEvent motionEvent) {

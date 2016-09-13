@@ -56,7 +56,6 @@ public class FrontCountdownSelectFragment extends Fragment implements FrontView 
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
         frontPresenter.setView(this);
-        onInteractionListener.setFrontPresenter(frontPresenter);
         countdownPicker.setOnTouchListener(onInteractionListener);
     }
 
