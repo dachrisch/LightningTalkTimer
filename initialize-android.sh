@@ -16,7 +16,7 @@ if [ ! -e ${INITIALIZATION_FILE} ]; then
   echo "done."
 
   echo -n "Update build tools to 24..."
-  echo y | android update sdk --no-ui --filter build-tools-24.0.1 --all > /dev/null
+  echo y | android update sdk --no-ui --filter build-tools-24.0.2 --all > /dev/null
   echo "done."
 
   echo -n "Update SDK to 23..."
