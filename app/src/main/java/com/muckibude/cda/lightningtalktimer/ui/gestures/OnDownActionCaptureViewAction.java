@@ -9,6 +9,12 @@ public class OnDownActionCaptureViewAction extends OnActionViewAction {
     protected ViewCapture onDownView;
     protected MotionEventCapture onDownMotionEvent;
 
+    enum MOVE_DIRECTION {
+        UP,
+        NO_MOVE,
+        DOWN
+    }
+
     @Override
     protected boolean acceptActionDown(MotionEvent motionEvent) {
         return true;
@@ -25,4 +31,11 @@ public class OnDownActionCaptureViewAction extends OnActionViewAction {
         return Math.abs(actualMotionEvent.getRawY() - onDownMotionEvent.getRawY());
     }
 
+    protected MOVE_DIRECTION moveDirection(MotionEvent actualMotionEvent) {
+        return moveDirection(MotionEventCapture.captureMotionEvent(actualMotionEvent));
+    }
+
+    protected MOVE_DIRECTION moveDirection(MotionEventCapture actualMotionEvent) {
+        return MOVE_DIRECTION.values()[(int) Math.signum(actualMotionEvent.getRawY() - onDownMotionEvent.getRawY()) + 1];
+    }
 }

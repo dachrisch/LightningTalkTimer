@@ -17,7 +17,6 @@ public class PausableOneSecondCountdownTimer implements PausableCountdownTimer {
 
     public PausableOneSecondCountdownTimer(@NonNull CountdownEntity countdownEntity) {
         this.countdownEntity = countdownEntity;
-
     }
 
     @Override

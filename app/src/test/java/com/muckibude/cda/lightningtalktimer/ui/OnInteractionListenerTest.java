@@ -7,6 +7,7 @@ import android.view.ViewPropertyAnimator;
 
 import com.muckibude.cda.lightningtalktimer.presentation.FrontPresenter;
 import com.muckibude.cda.lightningtalktimer.ui.gestures.ChangeColorAction;
+import com.muckibude.cda.lightningtalktimer.ui.gestures.OnHoldToggleTimerViewAction;
 import com.muckibude.cda.lightningtalktimer.ui.gestures.OnInteractionListener;
 import com.muckibude.cda.lightningtalktimer.ui.gestures.RebaseViewAction;
 import com.muckibude.cda.lightningtalktimer.ui.gestures.ToggleTimerAction;
@@ -15,6 +16,7 @@ import com.muckibude.cda.lightningtalktimer.ui.gestures.ViewAction;
 import com.muckibude.cda.lightningtalktimer.ui.gestures.ViewActionChain;
 
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 
 import java.util.HashSet;
 
@@ -88,6 +90,46 @@ public class OnInteractionListenerTest {
         chain.add(viewAction);
         ViewActionChain viewActionChain = new ViewActionChain(chain);
         return viewActionChain;
+    }
+
+    @Test
+    public void onHoldAfterUpMovementTimerWillIncrease() throws InterruptedException {
+        FrontPresenter frontPresenter = mock(FrontPresenter.class);
+        OnInteractionListener onInteractionListener = new OnInteractionListener(
+                viewActionChainWith(new OnHoldToggleTimerViewAction(frontPresenter, new NoDelayTimerFactory())));
+        MotionEvent initialMotionEvent = mock(MotionEvent.class);
+        View initialView = mock(View.class);
+        when(initialMotionEvent.getAction()).thenReturn(MotionEvent.ACTION_DOWN);
+        when(initialMotionEvent.getRawY()).thenReturn(Float.valueOf(110));
+        onInteractionListener.onTouch(initialView, initialMotionEvent);
+        when(initialMotionEvent.getAction()).thenReturn(MotionEvent.ACTION_MOVE);
+        when(initialMotionEvent.getRawY()).thenReturn(Float.valueOf(90));
+        onInteractionListener.onTouch(initialView, initialMotionEvent);
+        postExecutesDirectly(initialView);
+        verify(frontPresenter).increase15Seconds();
+    }
+
+    private void postExecutesDirectly(View initialView) {
+        ArgumentCaptor<Runnable> runnableArgumentCaptor = ArgumentCaptor.forClass(Runnable.class);
+        verify(initialView).post(runnableArgumentCaptor.capture());
+        runnableArgumentCaptor.getValue().run();
+    }
+
+    @Test
+    public void onHoldAfterDownMovementTimerWillDecrease() throws InterruptedException {
+        FrontPresenter frontPresenter = mock(FrontPresenter.class);
+        OnInteractionListener onInteractionListener = new OnInteractionListener(
+                viewActionChainWith(new OnHoldToggleTimerViewAction(frontPresenter, new NoDelayTimerFactory())));
+        MotionEvent initialMotionEvent = mock(MotionEvent.class);
+        View initialView = mock(View.class);
+        when(initialMotionEvent.getAction()).thenReturn(MotionEvent.ACTION_DOWN);
+        when(initialMotionEvent.getRawY()).thenReturn(Float.valueOf(90));
+        onInteractionListener.onTouch(initialView, initialMotionEvent);
+        when(initialMotionEvent.getAction()).thenReturn(MotionEvent.ACTION_MOVE);
+        when(initialMotionEvent.getRawY()).thenReturn(Float.valueOf(110));
+        onInteractionListener.onTouch(initialView, initialMotionEvent);
+        postExecutesDirectly(initialView);
+        verify(frontPresenter).decrease15Seconds();
     }
 
     @Test

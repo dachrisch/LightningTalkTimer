@@ -8,7 +8,9 @@ import com.muckibude.cda.lightningtalktimer.presentation.FrontPresenter;
 import com.muckibude.cda.lightningtalktimer.ui.BackCountdownDisplayFragment;
 import com.muckibude.cda.lightningtalktimer.ui.FrontCountdownSelectFragment;
 import com.muckibude.cda.lightningtalktimer.ui.gestures.ChangeColorAction;
+import com.muckibude.cda.lightningtalktimer.ui.gestures.OnHoldToggleTimerViewAction;
 import com.muckibude.cda.lightningtalktimer.ui.gestures.RebaseViewAction;
+import com.muckibude.cda.lightningtalktimer.ui.gestures.TimerFactory;
 import com.muckibude.cda.lightningtalktimer.ui.gestures.ToggleTimerAction;
 import com.muckibude.cda.lightningtalktimer.ui.gestures.UpDownMoveAction;
 import com.muckibude.cda.lightningtalktimer.ui.gestures.ViewAction;
@@ -29,8 +31,8 @@ public class TimerModule {
 
     @Singleton
     @Provides
-    public FrontPresenter providesFrontPresenter() {
-        return new FrontPresenter(providesFrontModel());
+    public FrontPresenter providesFrontPresenter(FrontModel frontModel) {
+        return new FrontPresenter(frontModel);
     }
 
     @Provides
@@ -72,6 +74,18 @@ public class TimerModule {
     @IntoSet
     public ViewAction providesChangeColorAction(FrontPresenter frontPresenter) {
         return new ChangeColorAction(frontPresenter);
+    }
+
+    @Provides
+    @IntoSet
+    public ViewAction providesOnHoldToggleTimerViewAction(FrontPresenter frontPresenter, TimerFactory timerFactory) {
+        return new OnHoldToggleTimerViewAction(frontPresenter, timerFactory);
+    }
+
+    @Provides
+    @Singleton
+    public TimerFactory providesTimerFactory() {
+        return new TimerFactory();
     }
 
 }

@@ -21,10 +21,13 @@ public class ToggleTimerAction extends OnDownActionCaptureViewAction {
     @Override
     protected void onActionUp(View view, MotionEvent actualMotionEvent) {
         super.onActionUp(view, actualMotionEvent);
-        if (Math.signum(actualMotionEvent.getRawY() - onDownMotionEvent.getRawY()) < 0) {
-            frontPresenter.increase15Seconds();
-        } else {
-            frontPresenter.decrease15Seconds();
+        switch (moveDirection(actualMotionEvent)) {
+            case UP:
+                frontPresenter.increase15Seconds();
+                break;
+            case DOWN:
+                frontPresenter.decrease15Seconds();
+                break;
         }
 
     }
