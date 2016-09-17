@@ -19,8 +19,8 @@ if [ ! -e ${INITIALIZATION_FILE} ]; then
   echo y | android update sdk --no-ui --filter build-tools-24.0.1 --all > /dev/null
   echo "done."
 
-  echo -n "Update SDK to 24..."
-  echo y | android update sdk --no-ui --filter android-24 > /dev/null
+  echo -n "Update SDK to 23..."
+  echo y | android update sdk --no-ui --filter android-23 > /dev/null
   echo "done."
 
   # uncomment to install the Extra/Android Support Library
@@ -34,7 +34,7 @@ if [ ! -e ${INITIALIZATION_FILE} ]; then
 
   echo -n "Install emulator..."
   # Specify at least one system image if you want to run emulator tests
-  echo y | android update sdk --no-ui --filter sys-img-armeabi-v7a-android-24 --all > /dev/null
+  echo y | android update sdk --no-ui --filter sys-img-armeabi-v7a-android-23 --all > /dev/null
   echo "done."
 
   touch ${INITIALIZATION_FILE}
