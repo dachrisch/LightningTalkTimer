@@ -7,7 +7,7 @@ echo -n "checking for device start..."
 adb wait-for-any-device
 bootanim=""
 failcounter=0
-until [[ "$bootanim" =~ "running" ]]; do
+until [[ "$bootanim" =~ "stopped" ]]; do
    bootanim=`adb -e shell getprop init.svc.bootanim 2>&1`
    echo -n "."
    if [[ "$bootanim" =~ "error" ]]; then
