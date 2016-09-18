@@ -5,13 +5,14 @@ machine:
 
 dependencies:
   pre:
-    - echo y | android update sdk --no-ui --all --filter "tool,platform-tools,build-tools-24.0.1,android-24,extra-google-m2repository,extra-android-m2repository,sys-img-armeabi-v7a-android-24"
-    -  echo n | android create avd -n testing -f -t android-24 --abi default/armeabi-v7a
+    - echo y | android update sdk --no-ui --all --filter "tool,platform-tools,build-tools-24.0.2,android-24,extra-google-m2repository,extra-android-m2repository,sys-img-armeabi-v7a-android-24"
+    -  echo n | android create avd -n testing -f -t android-23 --abi default/armeabi-v7a
 
 test:
-  override:
+  pre:
     - emulator -avd testing -no-window -no-boot-anim -no-audio:
         background: true
         parallel: true
     - circle-android wait-for-boot
+  override:
     - ./gradlew connectedAndroidTest -PdisablePreDex
