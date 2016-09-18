@@ -29,6 +29,6 @@ echo "+++++++ [3] Startup Emulator for UI tests +++++++"
 ./android-wait-for-emulator.sh
 
 echo "+++++++ [4] Running UI tests +++++++"
-./gradlew connectedAndroidTest --stacktrace
+./gradlew connectedAndroidTest -PdisablePreDex --stacktrace
 
 popd
