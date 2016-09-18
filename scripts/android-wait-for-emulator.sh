@@ -23,7 +23,7 @@ echo "started!"
 echo -n "checking for package service..."
 service_check=""
 failcounter=0
-until [[ "$service_check" = "Service package: found" ]]; do
+until [[ "$service_check" =~ "Service package: found" ]]; do
     service_check=`adb shell service check package`
     echo -n "."
     let "failcounter += 1"
