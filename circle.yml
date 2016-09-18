@@ -15,4 +15,4 @@ test:
         parallel: true
     - circle-android wait-for-boot
   override:
-    - ./gradlew connectedAndroidTest -PdisablePreDex
+    - ./gradlew connectedAndroidTest -PdisablePreDex --stacktrace
