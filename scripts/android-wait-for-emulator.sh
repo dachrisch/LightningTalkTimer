@@ -5,7 +5,6 @@
 set -e
 
 echo -n "checking for device start..."
-adb wait-for-any-device
 bootanim=""
 failcounter=0
 until [[ "$bootanim" =~ "stopped" ]]; do

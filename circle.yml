@@ -12,7 +12,7 @@ dependencies:
 
 test:
   pre:
-    - emulator -avd testing -no-window -no-boot-anim -no-audio:
+    - emulator -avd testing -no-window -no-boot-anim:
         background: true
         parallel: true
     - ./scripts/android-wait-for-emulator.sh
