@@ -61,8 +61,8 @@ public class CountdownEntity implements Serializable {
     }
 
     public void updateFromMillis(long millisRemaining) {
-        minutes = (int) (Math.ceil(Double.valueOf(millisRemaining) / 1000.0) / 60);
-        seconds = (int) (Math.ceil(Double.valueOf(millisRemaining) / 1000.0) % 60);
+        minutes = (int) (Math.ceil((double) millisRemaining / 1000.0) / 60);
+        seconds = (int) (Math.ceil((double) millisRemaining / 1000.0) % 60);
         informChanged();
     }
 

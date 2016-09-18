@@ -17,18 +17,18 @@ fi
 
 export PATH=$PATH:${ANDROID_HOME}/tools:/var/packages/git/target/bin
 
-echo "[1] Initialize Android SDK"
+echo "+++++++ [1] Initialize Android SDK +++++++"
 ./initialize-android.sh
 
-echo "[2] Build the app"
+echo "+++++++ [2] Build the app +++++++"
 ./gradlew test assemble
 
-echo "[3] Startup Emulator for UI tests"
+echo "+++++++ [3] Startup Emulator for UI tests +++++++"
 ./start-emulator.sh
 
 ./android-wait-for-emulator.sh
 
-echo "[4] Running UI tests"
+echo "+++++++ [4] Running UI tests +++++++"
 ./gradlew connectedAndroidTest --stacktrace
 
 popd

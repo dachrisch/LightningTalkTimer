@@ -8,7 +8,7 @@ TEST_FILE=${ANDROID_HOME}/.snap-initialization
 
 if [ ! -e "${TEST_FILE}" ]; then
   mkdir -p ${ANDROID_HOME}
-  mkdir -p $(dirname $ANDROID_TAR_PATH)
+  mkdir -p $(dirname ${ANDROID_TAR_PATH})
   echo "Downloading android sdk from ${ANDROID_SDK_URL}"
   wget --quiet http://dl.google.com/android/android-sdk_r24.3.3-linux.tgz -O ${ANDROID_TAR_PATH}
   echo "Verifying integrity of downloaded file."

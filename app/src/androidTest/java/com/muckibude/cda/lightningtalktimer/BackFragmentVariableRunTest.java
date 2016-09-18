@@ -31,7 +31,7 @@ public class BackFragmentVariableRunTest {
     @Rule
     public final TestAppComponentRule componentRule = new TestAppComponentRule();
     @Rule
-    public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
+    public final ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
             MainActivity.class, false, false);
     private boolean blinkScreenInvoked = false;
     private CountdownEntity minutesSecondsEntity;

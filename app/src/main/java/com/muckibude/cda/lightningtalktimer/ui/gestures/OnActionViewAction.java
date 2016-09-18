@@ -33,27 +33,27 @@ public class OnActionViewAction implements ViewAction {
         }
     }
 
-    protected boolean acceptActionMove(MotionEvent motionEvent) {
+    boolean acceptActionMove(MotionEvent motionEvent) {
         return false;
     }
 
-    protected boolean acceptActionUp(MotionEvent motionEvent) {
+    boolean acceptActionUp(MotionEvent motionEvent) {
         return false;
     }
 
-    protected boolean acceptActionDown(MotionEvent motionEvent) {
+    boolean acceptActionDown(MotionEvent motionEvent) {
         return false;
     }
 
-    protected void onActionMove(View view, MotionEvent motionEvent) {
+    void onActionMove(View view, MotionEvent motionEvent) {
 
     }
 
-    protected void onActionUp(View view, MotionEvent motionEvent) {
+    void onActionUp(View view, MotionEvent motionEvent) {
 
     }
 
-    protected void onActionDown(View view, MotionEvent motionEvent) {
+    void onActionDown(View view, MotionEvent motionEvent) {
 
     }
 }

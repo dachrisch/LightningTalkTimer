@@ -2,8 +2,7 @@ package com.muckibude.cda.lightningtalktimer.domain.timer;
 
 public class NotStartableCountdownTimer implements PausableCountdownTimer {
     @Override
-    public PausableCountdownTimer start() {
-        return this;
+    public void start() {
     }
 
     @Override

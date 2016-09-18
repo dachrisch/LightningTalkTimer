@@ -18,7 +18,7 @@ import static com.muckibude.cda.lightningtalktimer.matcher.BackgroundColorMatche
 @RunWith(AndroidJUnit4.class)
 public class BackFragmentColorIntegrationTest {
     @Rule
-    public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
+    public final ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
             MainActivity.class);
     @Rule
     public final TestAppComponentRule componentRule = new TestAppComponentRule();

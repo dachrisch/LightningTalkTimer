@@ -39,7 +39,7 @@ public class OnInteractionListenerTest {
 
     @Test
     public void onUpMovementViewIsMovedUp() {
-        OnInteractionListener onInteractionListener = new OnInteractionListener(viewActionChainWith(new UpDownMoveAction()));
+        View.OnTouchListener onInteractionListener = new OnInteractionListener(viewActionChainWith(new UpDownMoveAction()));
         MotionEvent initialMotionEvent = mock(MotionEvent.class);
         View initialView = mock(View.class);
         ViewPropertyAnimator viewPropertyAnimator = mockViewPropertyAnimator(initialView);
@@ -54,7 +54,7 @@ public class OnInteractionListenerTest {
 
     @Test
     public void onDownMovementViewIsMovedDown() {
-        OnInteractionListener onInteractionListener = new OnInteractionListener(viewActionChainWith(new UpDownMoveAction()));
+        View.OnTouchListener onInteractionListener = new OnInteractionListener(viewActionChainWith(new UpDownMoveAction()));
         MotionEvent initialMotionEvent = mock(MotionEvent.class);
         View initialView = mock(View.class);
         ViewPropertyAnimator viewPropertyAnimator = mockViewPropertyAnimator(initialView);
@@ -70,7 +70,7 @@ public class OnInteractionListenerTest {
     @Test
     public void onDownMovementSecondsAreDecremented() {
         FrontPresenter frontPresenter = mock(FrontPresenter.class);
-        OnInteractionListener onInteractionListener = new OnInteractionListener(viewActionChainWith(new ToggleTimerAction(frontPresenter)));
+        View.OnTouchListener onInteractionListener = new OnInteractionListener(viewActionChainWith(new ToggleTimerAction(frontPresenter)));
         MotionEvent initialMotionEvent = mock(MotionEvent.class);
         View initialView = mock(View.class);
         when(initialMotionEvent.getAction()).thenReturn(MotionEvent.ACTION_DOWN);
@@ -88,14 +88,13 @@ public class OnInteractionListenerTest {
     private ViewActionChain viewActionChainWith(ViewAction viewAction) {
         HashSet<ViewAction> chain = new HashSet<>();
         chain.add(viewAction);
-        ViewActionChain viewActionChain = new ViewActionChain(chain);
-        return viewActionChain;
+        return new ViewActionChain(chain);
     }
 
     @Test
-    public void onHoldAfterUpMovementTimerWillIncrease() throws InterruptedException {
+    public void onHoldAfterUpMovementTimerWillIncrease() {
         FrontPresenter frontPresenter = mock(FrontPresenter.class);
-        OnInteractionListener onInteractionListener = new OnInteractionListener(
+        View.OnTouchListener onInteractionListener = new OnInteractionListener(
                 viewActionChainWith(new OnHoldToggleTimerViewAction(frontPresenter, new NoDelayTimerFactory())));
         MotionEvent initialMotionEvent = mock(MotionEvent.class);
         View initialView = mock(View.class);
@@ -116,9 +115,9 @@ public class OnInteractionListenerTest {
     }
 
     @Test
-    public void onHoldAfterDownMovementTimerWillDecrease() throws InterruptedException {
+    public void onHoldAfterDownMovementTimerWillDecrease() {
         FrontPresenter frontPresenter = mock(FrontPresenter.class);
-        OnInteractionListener onInteractionListener = new OnInteractionListener(
+        View.OnTouchListener onInteractionListener = new OnInteractionListener(
                 viewActionChainWith(new OnHoldToggleTimerViewAction(frontPresenter, new NoDelayTimerFactory())));
         MotionEvent initialMotionEvent = mock(MotionEvent.class);
         View initialView = mock(View.class);
@@ -135,7 +134,7 @@ public class OnInteractionListenerTest {
     @Test
     public void onUpMovementSecondsAreIncremented() {
         FrontPresenter frontPresenter = mock(FrontPresenter.class);
-        OnInteractionListener onInteractionListener = new OnInteractionListener(viewActionChainWith(new ToggleTimerAction(frontPresenter)));
+        View.OnTouchListener onInteractionListener = new OnInteractionListener(viewActionChainWith(new ToggleTimerAction(frontPresenter)));
         MotionEvent initialMotionEvent = mock(MotionEvent.class);
         View initialView = mock(View.class);
         when(initialMotionEvent.getAction()).thenReturn(MotionEvent.ACTION_DOWN);
@@ -152,7 +151,7 @@ public class OnInteractionListenerTest {
     @Test
     public void onNoMovementTimerIsUnchanged() {
         FrontPresenter frontPresenter = mock(FrontPresenter.class);
-        OnInteractionListener onInteractionListener = new OnInteractionListener(viewActionChainWith(new ToggleTimerAction(frontPresenter)));
+        View.OnTouchListener onInteractionListener = new OnInteractionListener(viewActionChainWith(new ToggleTimerAction(frontPresenter)));
         MotionEvent initialMotionEvent = mock(MotionEvent.class);
         View initialView = mock(View.class);
         when(initialMotionEvent.getAction()).thenReturn(MotionEvent.ACTION_DOWN);
@@ -171,7 +170,7 @@ public class OnInteractionListenerTest {
     @Test
     public void whenSimpleClickedColorIsChanged() {
         FrontPresenter frontPresenter = mock(FrontPresenter.class);
-        OnInteractionListener onInteractionListener = new OnInteractionListener(viewActionChainWith(new ChangeColorAction(frontPresenter)));
+        View.OnTouchListener onInteractionListener = new OnInteractionListener(viewActionChainWith(new ChangeColorAction(frontPresenter)));
         MotionEvent initialMotionEvent = mock(MotionEvent.class);
         View initialView = mock(View.class);
         when(initialMotionEvent.getAction()).thenReturn(MotionEvent.ACTION_DOWN);
@@ -184,7 +183,7 @@ public class OnInteractionListenerTest {
 
     @Test
     public void whenSecondMovementStartsActionIsReset() {
-        OnInteractionListener onInteractionListener = new OnInteractionListener(viewActionChainWith(new RebaseViewAction()));
+        View.OnTouchListener onInteractionListener = new OnInteractionListener(viewActionChainWith(new RebaseViewAction()));
         MotionEvent initialMotionEvent = mock(MotionEvent.class);
         View initialView = mock(View.class);
         when(initialMotionEvent.getAction()).thenReturn(MotionEvent.ACTION_DOWN);

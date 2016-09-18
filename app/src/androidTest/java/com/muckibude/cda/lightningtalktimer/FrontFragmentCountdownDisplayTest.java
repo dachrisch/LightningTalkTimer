@@ -26,7 +26,7 @@ import static org.hamcrest.CoreMatchers.not;
 @RunWith(AndroidJUnit4.class)
 public class FrontFragmentCountdownDisplayTest {
     @Rule
-    public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
+    public final ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
             MainActivity.class, false, false);
     @Rule
     public final TestAppComponentRule componentRule = new TestAppComponentRule();

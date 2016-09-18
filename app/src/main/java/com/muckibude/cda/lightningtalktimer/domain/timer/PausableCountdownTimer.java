@@ -1,7 +1,7 @@
 package com.muckibude.cda.lightningtalktimer.domain.timer;
 
 public interface PausableCountdownTimer {
-    PausableCountdownTimer start();
+    void start();
 
     void pause();
 

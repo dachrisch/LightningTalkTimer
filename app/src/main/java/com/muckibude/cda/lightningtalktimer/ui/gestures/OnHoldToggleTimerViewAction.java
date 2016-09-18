@@ -13,7 +13,7 @@ import javax.inject.Inject;
 public class OnHoldToggleTimerViewAction extends OnDownActionCaptureViewAction {
 
     private final FrontPresenter frontPresenter;
-    private TimerFactory timerFactory;
+    private final TimerFactory timerFactory;
     private Timer timer;
 
     @Inject

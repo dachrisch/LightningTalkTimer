@@ -20,7 +20,7 @@ public class PausableOneSecondCountdownTimer implements PausableCountdownTimer {
     }
 
     @Override
-    public PausableCountdownTimer start() {
+    public void start() {
         isRunning = true;
 
         countDownTimer = new CountDownTimer(countdownEntity.inMillis(), 333) {
@@ -39,7 +39,6 @@ public class PausableOneSecondCountdownTimer implements PausableCountdownTimer {
             }
         };
         countDownTimer.start();
-        return this;
     }
 
     protected void onTick(long millisRemaining) {
