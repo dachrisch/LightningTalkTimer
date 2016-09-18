@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 ANDROID_SDK_URL="http://dl.google.com/android/android-sdk_r24.3.3-linux.tgz"
 ANDROID_SDK_TAR="android-sdk_r24.3.3-linux.tgz"
