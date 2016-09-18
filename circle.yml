@@ -2,6 +2,8 @@ machine:
   environment:
     ANDROID_HOME: /usr/local/android-sdk-linux
     GRADLE_OPTS: -Xmx512m
+    WAIT_EMULATOR_MAX_RETRIES: 15
+    WAIT_EMULATOR_TIME: 15
 
 dependencies:
   pre:
@@ -13,6 +15,6 @@ test:
     - emulator -avd testing -no-window -no-boot-anim -no-audio:
         background: true
         parallel: true
-    - circle-android wait-for-boot
+    - ./scripts/android-wait-for-emulator.sh
   override:
     - ./gradlew connectedAndroidTest -PdisablePreDex --stacktrace
