@@ -21,7 +21,7 @@ echo "+++++++ [1] Initialize Android SDK +++++++"
 ./initialize-android.sh
 
 echo "+++++++ [2] Build the app +++++++"
-./gradlew test assemble
+../gradlew test assemble
 
 echo "+++++++ [3] Startup Emulator for UI tests +++++++"
 ./start-emulator.sh
@@ -29,6 +29,6 @@ echo "+++++++ [3] Startup Emulator for UI tests +++++++"
 ./android-wait-for-emulator.sh
 
 echo "+++++++ [4] Running UI tests +++++++"
-./gradlew connectedAndroidTest -PdisablePreDex --stacktrace
+../gradlew connectedAndroidTest -PdisablePreDex --stacktrace
 
 popd
