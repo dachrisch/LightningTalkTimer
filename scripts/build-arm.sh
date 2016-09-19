@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -e
+exec &>> build-arm.log
 
 export SNAP_CACHE_DIR=/var/services/tmp/
 export ANDROID_HOME=/var/services/homes/cda/dev/android_sdk
