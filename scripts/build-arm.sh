@@ -19,16 +19,20 @@ export PATH=$PATH:${ANDROID_HOME}/tools:/var/packages/git/target/bin
 
 echo "+++++++ [1] Initialize Android SDK +++++++"
 ./initialize-android.sh
+echo "+++++++ [1] Done (Initialize Android SDK) +++++++"
 
 echo "+++++++ [2] Build the app +++++++"
-../gradlew test assemble
+../gradlew -Dorg.gradle.jvmargs=-Xmx256M test assemble
+echo "+++++++ [2] Done (Build the app) +++++++"
 
 echo "+++++++ [3] Startup Emulator for UI tests +++++++"
 ./start-emulator.sh
+echo "+++++++ [3] Done (Startup Emulator for UI tests) +++++++"
 
 ./android-wait-for-emulator.sh
 
 echo "+++++++ [4] Running UI tests +++++++"
-../gradlew connectedAndroidTest -PdisablePreDex --stacktrace
+../gradlew -Dorg.gradle.jvmargs=-Xmx256M connectedAndroidTest -PdisablePreDex --stacktrace
+echo "+++++++ [4] Done (Running UI tests) +++++++"
 
 popd
