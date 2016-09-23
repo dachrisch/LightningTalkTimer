@@ -85,7 +85,7 @@ public class OnInteractionListenerTest {
         onInteractionListener.onTouch(initialView, initialMotionEvent);
         when(initialMotionEvent.getAction()).thenReturn(MotionEvent.ACTION_UP);
         onInteractionListener.onTouch(initialView, initialMotionEvent);
-        verify(frontPresenter).decrease15Seconds();
+        verify(frontPresenter).decrease();
     }
 
     @NonNull
@@ -109,7 +109,7 @@ public class OnInteractionListenerTest {
         when(initialMotionEvent.getRawY()).thenReturn(Float.valueOf(90));
         onInteractionListener.onTouch(initialView, initialMotionEvent);
         postExecutesDirectly(initialView);
-        verify(frontPresenter).increase15Seconds();
+        verify(frontPresenter).increase();
     }
 
     private void postExecutesDirectly(View initialView) {
@@ -132,7 +132,7 @@ public class OnInteractionListenerTest {
         when(initialMotionEvent.getRawY()).thenReturn(Float.valueOf(110));
         onInteractionListener.onTouch(initialView, initialMotionEvent);
         postExecutesDirectly(initialView);
-        verify(frontPresenter).decrease15Seconds();
+        verify(frontPresenter).decrease();
     }
 
     @Test
@@ -149,7 +149,7 @@ public class OnInteractionListenerTest {
         onInteractionListener.onTouch(initialView, initialMotionEvent);
         when(initialMotionEvent.getAction()).thenReturn(MotionEvent.ACTION_UP);
         onInteractionListener.onTouch(initialView, initialMotionEvent);
-        verify(frontPresenter).increase15Seconds();
+        verify(frontPresenter).increase();
     }
 
     @Test
@@ -167,8 +167,8 @@ public class OnInteractionListenerTest {
 
         when(initialMotionEvent.getAction()).thenReturn(MotionEvent.ACTION_UP);
         onInteractionListener.onTouch(initialView, initialMotionEvent);
-        verify(frontPresenter, never()).decrease15Seconds();
-        verify(frontPresenter, never()).increase15Seconds();
+        verify(frontPresenter, never()).decrease();
+        verify(frontPresenter, never()).increase();
     }
 
     @Test

@@ -41,10 +41,10 @@ public class FrontPresenterTest {
         CountdownEntity secondsEntity = new CountdownEntity(2, 15);
         FrontPresenter presenter = createFrontPresenter(secondsEntity);
         presenter.setView(view);
-        presenter.decrease15Seconds();
-        presenter.decrease15Seconds();
-        presenter.decrease15Seconds();
-        presenter.decrease15Seconds();
+        presenter.decrease();
+        presenter.decrease();
+        presenter.decrease();
+        presenter.decrease();
         assertThat(secondsEntity, is(new CountdownEntity(1, 15)));
 
     }
@@ -56,7 +56,7 @@ public class FrontPresenterTest {
         FrontPresenter presenter = createFrontPresenter(secondsEntity);
         presenter.setView(view);
         verify(view).display(9, 45);
-        presenter.increase15Seconds();
+        presenter.increase();
         assertThat(secondsEntity, is(new CountdownEntity(10, 0)));
         verify(view).display(10);
     }
@@ -68,7 +68,7 @@ public class FrontPresenterTest {
         FrontPresenter presenter = createFrontPresenter(secondsEntity);
         presenter.setView(view);
         verify(view).display(10);
-        presenter.increase15Seconds();
+        presenter.increase();
         assertThat(secondsEntity, is(new CountdownEntity(11, 0)));
         verify(view).display(11);
     }
@@ -80,7 +80,7 @@ public class FrontPresenterTest {
         FrontPresenter presenter = createFrontPresenter(secondsEntity);
         presenter.setView(view);
         verify(view).display(12);
-        presenter.decrease15Seconds();
+        presenter.decrease();
         assertThat(secondsEntity, is(new CountdownEntity(11, 0)));
         verify(view).display(11);
     }
@@ -92,7 +92,7 @@ public class FrontPresenterTest {
         FrontPresenter presenter = createFrontPresenter(secondsEntity);
         presenter.setView(view);
         verify(view).display(10);
-        presenter.decrease15Seconds();
+        presenter.decrease();
         assertThat(secondsEntity, is(new CountdownEntity(9, 45)));
         verify(view).display(9, 45);
     }
@@ -122,7 +122,7 @@ public class FrontPresenterTest {
         CountdownEntity secondsEntity = new CountdownEntity(1, seconds);
         FrontPresenter presenter = createFrontPresenter(secondsEntity);
         presenter.setView(view);
-        presenter.increase15Seconds();
+        presenter.increase();
         return secondsEntity.getSeconds();
     }
 
@@ -131,7 +131,7 @@ public class FrontPresenterTest {
         CountdownEntity secondsEntity = new CountdownEntity(1, seconds);
         FrontPresenter presenter = createFrontPresenter(secondsEntity);
         presenter.setView(view);
-        presenter.decrease15Seconds();
+        presenter.decrease();
         return secondsEntity.getSeconds();
     }
 
