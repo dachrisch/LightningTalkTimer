@@ -62,6 +62,42 @@ public class FrontPresenterTest {
     }
 
     @Test
+    public void above10MinutesMinutesAreIncremented() {
+        FrontView view = mock(FrontView.class);
+        CountdownEntity secondsEntity = new CountdownEntity(10, 00);
+        FrontPresenter presenter = createFrontPresenter(secondsEntity);
+        presenter.setView(view);
+        verify(view).display(10);
+        presenter.increase15Seconds();
+        assertThat(secondsEntity, is(new CountdownEntity(11, 0)));
+        verify(view).display(11);
+    }
+
+    @Test
+    public void above10MinutesMinutesAreDecremented() {
+        FrontView view = mock(FrontView.class);
+        CountdownEntity secondsEntity = new CountdownEntity(12, 00);
+        FrontPresenter presenter = createFrontPresenter(secondsEntity);
+        presenter.setView(view);
+        verify(view).display(12);
+        presenter.decrease15Seconds();
+        assertThat(secondsEntity, is(new CountdownEntity(11, 0)));
+        verify(view).display(11);
+    }
+
+    @Test
+    public void after10Minutes945willBeDisplayed() {
+        FrontView view = mock(FrontView.class);
+        CountdownEntity secondsEntity = new CountdownEntity(10, 00);
+        FrontPresenter presenter = createFrontPresenter(secondsEntity);
+        presenter.setView(view);
+        verify(view).display(10);
+        presenter.decrease15Seconds();
+        assertThat(secondsEntity, is(new CountdownEntity(9, 45)));
+        verify(view).display(9, 45);
+    }
+
+    @Test
     public void toggleThroughColors() {
         FrontView view = mock(FrontView.class);
 

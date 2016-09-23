@@ -9,6 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:textSize="@dimen/countdown_big_text_size"
+        android:paddingTop="50sp"
         android:id="@+id/big_number_text_view"
         android:textColor="#ffffff"
         android:scaleY="1.8"

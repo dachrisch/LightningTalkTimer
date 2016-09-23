@@ -1,5 +1,6 @@
 package com.muckibude.cda.lightningtalktimer.ui;
 
+import android.animation.TimeInterpolator;
 import android.support.annotation.NonNull;
 import android.view.MotionEvent;
 import android.view.View;
@@ -22,6 +23,7 @@ import java.util.HashSet;
 
 import static org.mockito.Matchers.anyFloat;
 import static org.mockito.Matchers.anyLong;
+import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -34,6 +36,8 @@ public class OnInteractionListenerTest {
         when(initialView.animate()).thenReturn(viewPropertyAnimator);
         when(viewPropertyAnimator.y(anyFloat())).thenReturn(viewPropertyAnimator);
         when(viewPropertyAnimator.setDuration(anyLong())).thenReturn(viewPropertyAnimator);
+        when(viewPropertyAnimator.setInterpolator((TimeInterpolator) anyObject())).thenReturn
+                (viewPropertyAnimator);
         return viewPropertyAnimator;
     }
 

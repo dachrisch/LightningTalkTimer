@@ -54,7 +54,16 @@ public class FrontModel {
         return currentColor;
     }
 
-    public void registerEntityChangeListener(EntityChangeListener<CountdownEntity> entityChangeListener) {
+    public void registerEntityChangeListener(EntityChangeListener<CountdownEntity>
+                                                     entityChangeListener) {
         countdownEntity.registerEntityChangeListener(entityChangeListener);
+    }
+
+    public void increaseOneMinute() {
+        countdownEntity.incrementSeconds(60);
+    }
+
+    public void decreaseOneMinute() {
+        countdownEntity.decrementSeconds(60);
     }
 }

@@ -23,13 +23,29 @@ public class FrontPresenter implements Presenter<FrontView>, EntityChangeListene
     }
 
     public void decrease15Seconds() {
-        Log.d(TAG, String.format(Locale.getDefault(), "%s - 00:15", frontModel.getCountdownEntity()));
-        frontModel.decrease15Seconds();
+        if (frontModel.getCountdownEntity().getMinutes() > 10) {
+            Log.d(TAG, String.format(Locale.getDefault(), "%s - 01:00", frontModel
+                    .getCountdownEntity()));
+            frontModel.decreaseOneMinute();
+        } else {
+            Log.d(TAG, String.format(Locale.getDefault(), "%s - 00:15", frontModel
+                    .getCountdownEntity
+                            ()));
+            frontModel.decrease15Seconds();
+        }
     }
 
     public void increase15Seconds() {
-        Log.d(TAG, String.format(Locale.getDefault(), "%s + 00:15", frontModel.getCountdownEntity()));
-        frontModel.increase15Seconds();
+        if (frontModel.getCountdownEntity().getMinutes() > 9) {
+            Log.d(TAG, String.format(Locale.getDefault(), "%s + 01:00", frontModel
+                    .getCountdownEntity()));
+            frontModel.increaseOneMinute();
+        } else {
+            Log.d(TAG, String.format(Locale.getDefault(), "%s + 00:15", frontModel
+                    .getCountdownEntity()));
+
+            frontModel.increase15Seconds();
+        }
     }
 
     @Override
