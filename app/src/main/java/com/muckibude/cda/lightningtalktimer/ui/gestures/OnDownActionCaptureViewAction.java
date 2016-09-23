@@ -36,6 +36,7 @@ public class OnDownActionCaptureViewAction extends OnActionViewAction {
     }
 
     private MOVE_DIRECTION moveDirection(MotionEventCapture actualMotionEvent) {
-        return MOVE_DIRECTION.values()[(int) Math.signum(actualMotionEvent.getRawY() - onDownMotionEvent.getRawY()) + 1];
+        return MOVE_DIRECTION.values()[(int) Math.signum(actualMotionEvent.getRawY() -
+                                                                 onDownMotionEvent.getRawY()) + 1];
     }
 }

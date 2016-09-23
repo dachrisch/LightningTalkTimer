@@ -7,7 +7,8 @@ import java.util.Locale;
 public class CountdownEntity implements Serializable {
     private int seconds;
     private int minutes;
-    private EntityChangeListener<CountdownEntity> entityChangeListener = new EmptyCountdownEntityChangeListener();
+    private EntityChangeListener<CountdownEntity> entityChangeListener = new
+            EmptyCountdownEntityChangeListener();
 
     public CountdownEntity(int minutes, int seconds) {
         this.seconds = seconds;
@@ -56,7 +57,8 @@ public class CountdownEntity implements Serializable {
         return (minutes * 60 + seconds) * 1000;
     }
 
-    public void registerEntityChangeListener(EntityChangeListener<CountdownEntity> entityChangeListener) {
+    public void registerEntityChangeListener(EntityChangeListener<CountdownEntity>
+                                                     entityChangeListener) {
         this.entityChangeListener = entityChangeListener;
     }
 
@@ -78,6 +80,7 @@ public class CountdownEntity implements Serializable {
             return false;
         }
         CountdownEntity otherCountdownEntity = ((CountdownEntity) other);
-        return (otherCountdownEntity.minutes == this.minutes) && (otherCountdownEntity.seconds == this.seconds);
+        return (otherCountdownEntity.minutes == this.minutes) && (otherCountdownEntity.seconds ==
+                this.seconds);
     }
 }

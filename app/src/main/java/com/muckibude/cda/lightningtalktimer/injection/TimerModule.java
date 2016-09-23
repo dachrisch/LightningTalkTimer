@@ -78,7 +78,8 @@ public class TimerModule {
 
     @Provides
     @IntoSet
-    public ViewAction providesOnHoldToggleTimerViewAction(FrontPresenter frontPresenter, TimerFactory timerFactory) {
+    public ViewAction providesOnHoldToggleTimerViewAction(FrontPresenter frontPresenter,
+                                                          TimerFactory timerFactory) {
         return new OnHoldToggleTimerViewAction(frontPresenter, timerFactory);
     }
 

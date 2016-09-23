@@ -51,7 +51,8 @@ public class BackCountdownDisplayFragment extends Fragment implements BackView {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
+            savedInstanceState) {
         return inflater.inflate(R.layout.back_countdown_display, container, false);
     }
 

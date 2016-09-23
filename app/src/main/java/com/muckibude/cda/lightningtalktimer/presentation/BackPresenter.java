@@ -10,7 +10,8 @@ import com.muckibude.cda.lightningtalktimer.domain.timer.OnFinishedListener;
 
 import javax.inject.Inject;
 
-public class BackPresenter implements Presenter<BackView>, EntityChangeListener<CountdownEntity>, OnFinishedListener {
+public class BackPresenter implements Presenter<BackView>, EntityChangeListener<CountdownEntity>,
+        OnFinishedListener {
     private static final String TAG = "BackPresenter";
     private final BackModel backModel;
     private BackView backView;
@@ -60,7 +61,8 @@ public class BackPresenter implements Presenter<BackView>, EntityChangeListener<
 
     public void getFrontArguments(Bundle arguments) {
         backModel.setBackgroundColor(arguments.getInt("backgroundColor"));
-        CountdownEntity startCountdown = (CountdownEntity) arguments.getSerializable("startCountdown");
+        CountdownEntity startCountdown = (CountdownEntity) arguments.getSerializable
+                ("startCountdown");
         backModel.setStartCountdown(startCountdown);
         inform(startCountdown);
     }

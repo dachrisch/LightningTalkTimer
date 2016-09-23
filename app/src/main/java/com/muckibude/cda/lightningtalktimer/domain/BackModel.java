@@ -40,7 +40,8 @@ public class BackModel {
     public void startCountdown() {
         Log.d(TAG, "start timer with: " + startCountdown);
 
-        CountdownEntity runningCountdown = new CountdownEntity(startCountdown.getMinutes(), startCountdown.getSeconds());
+        CountdownEntity runningCountdown = new CountdownEntity(startCountdown.getMinutes(),
+                                                               startCountdown.getSeconds());
         runningCountdown.registerEntityChangeListener(entityChangeListener);
 
         countdownTimer = pausableCountdownTimerBuilder.build(runningCountdown);
@@ -67,7 +68,8 @@ public class BackModel {
         }
     }
 
-    public void registerEntityChangeListener(EntityChangeListener<CountdownEntity> entityChangeListener) {
+    public void registerEntityChangeListener(EntityChangeListener<CountdownEntity>
+                                                     entityChangeListener) {
         this.entityChangeListener = entityChangeListener;
     }
 

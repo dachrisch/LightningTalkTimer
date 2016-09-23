@@ -47,7 +47,8 @@ public class FrontCountdownSelectFragment extends Fragment implements FrontView 
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
+            savedInstanceState) {
         return inflater.inflate(R.layout.front_countdown_setting, container, false);
     }
 

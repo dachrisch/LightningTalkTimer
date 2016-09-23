@@ -25,7 +25,8 @@ public class UpDownMoveAction extends OnDownActionCaptureViewAction {
                 .y(distanceAllowed + onDownView.getY())
                 .setDuration(0)
                 .start();
-        Log.d(TAG, String.format("action move event. animate(distanceAllowed(%f) + viewYPosition(%f))",
+        Log.d(TAG, String.format("action move event. animate(distanceAllowed(%f) + viewYPosition" +
+                                         "(%f))",
                                  distanceAllowed, onDownView.getY()));
     }
 
