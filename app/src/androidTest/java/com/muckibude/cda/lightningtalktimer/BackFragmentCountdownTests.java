@@ -41,7 +41,8 @@ public class BackFragmentCountdownTests {
     @Test
     public void onResumeTimerWillResume() {
         onView(withId(R.id.startButton)).perform(click());
-        onView(withId(R.id.pauseButton)).check(matches(withDrawable(R.drawable.pause_overlay)));
+        onView(withId(R.id.pauseButton)).check(matches(withDrawable(R.drawable
+                                                                            .pause_overlay_icon)));
         onView(withId(R.id.pauseButton)).perform(click());
         onView(withId(R.id.pauseButton)).check(matches(withDrawable(R.drawable.play_overlay_icon)));
     }

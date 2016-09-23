@@ -8,7 +8,7 @@
                 android:paddingTop="@dimen/activity_vertical_margin"
                 android:background="#7d7575">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/countdownPicker"
         android:layout_width="150dp"
         android:layout_height="150dp"
@@ -21,8 +21,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingStart="10dp"
+            android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:paddingStart="15dp"
             android:text="2"
             android:id="@+id/minutes"
             android:textSize="100sp"
@@ -34,7 +36,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="30dp"
+            android:layout_alignBaseline="@id/minutes"
+            android:layout_alignParentEnd="true"
+            android:paddingEnd="10sp"
+            android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="15"
             android:id="@+id/seconds"
@@ -43,11 +48,11 @@
             android:textStyle="bold"
             android:layout_gravity="center"
             android:textColor="#ffffff"/>
-    </LinearLayout>
+    </RelativeLayout>
 
     <ImageView
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="@dimen/button_size"
+        android:layout_height="@dimen/button_size"
         android:id="@+id/startButton"
         android:src="@drawable/play_overlay_icon"
         android:layout_alignParentBottom="true"

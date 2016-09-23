@@ -15,7 +15,6 @@
         android:scaleY="1.8"
         android:text="2"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:layout_above="@+id/small_number_text_view"
         />
 
@@ -32,10 +31,10 @@
         android:textStyle="bold"/>
 
     <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/button_size"
+        android:layout_height="@dimen/button_size"
         android:id="@+id/pauseButton"
-        android:src="@drawable/pause_overlay"
+        android:src="@drawable/pause_overlay_icon"
         android:layout_marginBottom="67dp"
         android:contentDescription="Start/Pause Button"/>
 </RelativeLayout>

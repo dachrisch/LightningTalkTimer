@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.muckibude.cda.lightningtalktimer.R;
@@ -36,7 +35,7 @@ public class FrontCountdownSelectFragment extends Fragment implements FrontView 
     @BindView(R.id.seconds)
     TextView secondsView;
     @BindView(R.id.countdownPicker)
-    LinearLayout countdownPicker;
+    View countdownPicker;
     @Inject
     OnInteractionListener onInteractionListener;
 
