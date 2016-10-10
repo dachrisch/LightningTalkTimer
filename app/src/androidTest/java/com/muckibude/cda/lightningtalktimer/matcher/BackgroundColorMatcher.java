@@ -1,13 +1,13 @@
 package com.muckibude.cda.lightningtalktimer.matcher;
 
-import android.annotation.TargetApi;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.os.Build;
 import android.util.Log;
 import android.view.View;
+
+import com.muckibude.cda.lightningtalktimer.domain.FrontModel;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -16,23 +16,24 @@ import org.hamcrest.TypeSafeMatcher;
 public class BackgroundColorMatcher extends TypeSafeMatcher<View> {
 
     private final int expectedColor;
+    private final FrontModel frontModel;
     private int actualColor;
 
-    public static Matcher<View> withBackgroundColor(final String color) {
-        return new BackgroundColorMatcher(color);
+    public static Matcher<View> withBackgroundColor(FrontModel frontModel, final String color) {
+        return new BackgroundColorMatcher(frontModel, color);
     }
 
-    private BackgroundColorMatcher(String rgbColor) {
+    private BackgroundColorMatcher(FrontModel frontModel, String rgbColor) {
         super(View.class);
         this.expectedColor = Color.parseColor(rgbColor);
+        this.frontModel = frontModel;
     }
 
-    @TargetApi(Build.VERSION_CODES.N)
     @Override
     protected boolean matchesSafely(View target) {
         Drawable drawable = target.getBackground();
         if (drawable instanceof GradientDrawable) {
-            actualColor = ((GradientDrawable) drawable).getColor().getDefaultColor();
+            actualColor = frontModel.getCurrentColor();
         } else if (drawable instanceof ColorDrawable) {
             actualColor = ((ColorDrawable) drawable).getColor();
         } else {

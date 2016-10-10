@@ -15,12 +15,10 @@ import org.junit.runner.RunWith;
 import java.util.concurrent.TimeUnit;
 
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.swipeDown;
 import static android.support.test.espresso.action.ViewActions.swipeUp;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static com.muckibude.cda.lightningtalktimer.matcher.BackgroundColorMatcher.withBackgroundColor;
 import static com.muckibude.cda.lightningtalktimer.matcher.TextViewMatcher.withTextOnView;
 
 @RunWith(AndroidJUnit4.class)
@@ -71,12 +69,6 @@ public class FrontFragmentSwipeIntegrationTest {
 
         onView(withId(R.id.minutes)).check(matches(withTextOnView("1")));
         onView(withId(R.id.seconds)).check(matches(withTextOnView("15")));
-    }
-
-    @Test
-    public void onSimpleClickColorWillChange() {
-        onView(withId(R.id.countdownPicker)).check(matches(withBackgroundColor("#77ff77")));
-        onView(withId(R.id.countdownPicker)).perform(click()).check(matches(withBackgroundColor("#77ddff")));
     }
 
 }
