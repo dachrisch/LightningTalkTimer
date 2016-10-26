@@ -53,26 +53,26 @@ public class BackFragmentColorIntegrationTest {
     public void backgroundColorTakenFromFrontFragment() {
         onView(withId(R.id.countdownPicker)).check(matches(withBackgroundColor
                                                                    (overrideFrontModel,
-                                                                    "#77ff77")));
+                                                                    ColorProvider.GREEN)));
         onView(withId(R.id.startButton)).perform(click());
         onView(withId(R.id.back_fragment_view)).check(matches(withBackgroundColor
                                                                       (overrideFrontModel,
-                                                                       "#77ff77")));
+                                                                       ColorProvider.GREEN)));
     }
 
     @Test
     public void backgroundColorStaysSameWhenGoingBack() {
         onView(withId(R.id.countdownPicker)).check(matches(withBackgroundColor
                                                                    (overrideFrontModel,
-                                                                    "#77ff77")));
+                                                                    ColorProvider.GREEN)));
         onView(withId(R.id.startButton)).perform(click());
         onView(withId(R.id.back_fragment_view)).check(matches(withBackgroundColor
                                                                       (overrideFrontModel,
-                                                                       "#77ff77")));
+                                                                       ColorProvider.GREEN)));
         mActivityRule.getActivity().getFragmentManager().popBackStack();
         onView(withId(R.id.countdownPicker)).check(matches(withBackgroundColor
                                                                    (overrideFrontModel,
-                                                                    "#77ff77")));
+                                                                    ColorProvider.GREEN)));
     }
 
 
@@ -80,9 +80,9 @@ public class BackFragmentColorIntegrationTest {
     public void onSimpleClickColorWillChange() {
         onView(withId(R.id.countdownPicker)).check(matches(withBackgroundColor
                                                                    (overrideFrontModel,
-                                                                    "#77ff77")));
+                                                                    ColorProvider.GREEN)));
         onView(withId(R.id.countdownPicker)).perform(click()).check(matches(withBackgroundColor
-                                                                                    (overrideFrontModel, "#77ddff")));
+                                                                                    (overrideFrontModel, ColorProvider.BLUE)));
     }
 
 }

@@ -14,16 +14,16 @@
         android:textColor="#ffffff"
         android:scaleY="1.8"
         android:text="2"
-        android:layout_centerHorizontal="true"
         android:layout_above="@+id/small_number_text_view"
         />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="00"
         android:textSize="@dimen/countdown_small_text_size"
         android:id="@+id/small_number_text_view"
+        android:textAlignment="center"
         android:layout_gravity="center|bottom"
         android:textColor="#ffffff"
         android:layout_alignParentBottom="true"

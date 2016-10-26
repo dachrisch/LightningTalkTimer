@@ -1,6 +1,5 @@
 package com.muckibude.cda.lightningtalktimer.matcher;
 
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -19,13 +18,14 @@ public class BackgroundColorMatcher extends TypeSafeMatcher<View> {
     private final FrontModel frontModel;
     private int actualColor;
 
-    public static Matcher<View> withBackgroundColor(FrontModel frontModel, final String color) {
-        return new BackgroundColorMatcher(frontModel, color);
+    public static Matcher<View> withBackgroundColor(FrontModel frontModel, final int
+            expectedColor) {
+        return new BackgroundColorMatcher(frontModel, expectedColor);
     }
 
-    private BackgroundColorMatcher(FrontModel frontModel, String rgbColor) {
+    private BackgroundColorMatcher(FrontModel frontModel, int expectedColor) {
         super(View.class);
-        this.expectedColor = Color.parseColor(rgbColor);
+        this.expectedColor = expectedColor;
         this.frontModel = frontModel;
     }
 

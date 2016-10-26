@@ -4,10 +4,14 @@ import java.util.ArrayList;
 
 public class ColorProvider extends ArrayList<Integer> {
 
+    public static final int GREEN = toColor("7cf77c");
+    public static final int BLUE = toColor("7cc5f5");
+    public static final int VIOLET = toColor("dd7ad9");
+
     public ColorProvider() {
-        add(toColor("77ff77"));
-        add(toColor("77ddff"));
-        add(toColor("dd77ff"));
+        add(GREEN);
+        add(BLUE);
+        add(VIOLET);
     }
 
     @Override

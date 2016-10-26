@@ -10,7 +10,9 @@ import com.muckibude.cda.lightningtalktimer.presentation.FrontView;
 
 import org.junit.Test;
 
-import static com.muckibude.cda.lightningtalktimer.domain.ColorProvider.toColor;
+import static com.muckibude.cda.lightningtalktimer.domain.ColorProvider.BLUE;
+import static com.muckibude.cda.lightningtalktimer.domain.ColorProvider.GREEN;
+import static com.muckibude.cda.lightningtalktimer.domain.ColorProvider.VIOLET;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
@@ -108,13 +110,13 @@ public class FrontPresenterTest {
         presenter.setView(view);
 
         presenter.toggleColor();
-        verify(view).switchPickerColorTo(toColor("77ddff"));
+        verify(view).switchPickerColorTo(BLUE);
 
         presenter.toggleColor();
-        verify(view).switchPickerColorTo(toColor("dd77ff"));
+        verify(view).switchPickerColorTo(VIOLET);
 
         presenter.toggleColor();
-        verify(view).switchPickerColorTo(toColor("77ff77"));
+        verify(view).switchPickerColorTo(GREEN);
     }
 
     private int incrementSeconds(int seconds) {
