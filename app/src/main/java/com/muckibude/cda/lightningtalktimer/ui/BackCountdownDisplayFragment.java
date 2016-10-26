@@ -5,7 +5,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,11 +83,6 @@ public class BackCountdownDisplayFragment extends Fragment implements BackView {
         bigNumberView.setText(String.format(Locale.getDefault(), "%d", minutes));
         smallNumberView.setText(String.format(Locale.getDefault(), "%02d", seconds));
         Log.d(TAG, String.format(Locale.getDefault(), "remaining time %d:%02d", minutes, seconds));
-        Log.d(TAG, String.format(Locale.getDefault(), "bigNumberView.getHeight: %d, textSize: %f",
-                                 bigNumberView.getHeight(), bigNumberView.getTextSize()));
-        bigNumberView.setTextSize(TypedValue.COMPLEX_UNIT_PX, bigNumberView.getHeight() /
-                bigNumberView
-                        .getTextScaleX());
 
     }
 
