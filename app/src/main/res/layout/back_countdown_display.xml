@@ -6,10 +6,10 @@
                 android:background="@android:color/transparent">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textSize="@dimen/countdown_big_text_size"
-        android:paddingTop="50sp"
+        android:gravity="center|bottom"
         android:id="@+id/big_number_text_view"
         android:textColor="#ffffff"
         android:scaleY="1.8"
