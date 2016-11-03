@@ -1,0 +1,8 @@
+<resources>
+    <!-- Galaxy S 7 -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="countdown_big_text_size">550sp</dimen>
+    <dimen name="countdown_small_text_size">100sp</dimen>
+    <dimen name="button_size">70dp</dimen>
+</resources>
