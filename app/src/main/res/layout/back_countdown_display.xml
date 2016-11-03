@@ -12,7 +12,8 @@
         android:gravity="center"
         android:id="@+id/big_number_text_view"
         android:textColor="#ffffff"
-        android:text="2"
+        android:scaleY="@dimen/scale_factor"
+        android:text="22"
         android:layout_above="@+id/small_number_text_view"
         />
 
