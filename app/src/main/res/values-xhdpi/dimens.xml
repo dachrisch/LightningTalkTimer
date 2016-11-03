@@ -5,4 +5,5 @@
     <dimen name="countdown_big_text_size">400sp</dimen>
     <dimen name="countdown_small_text_size">100sp</dimen>
     <dimen name="button_size">70dp</dimen>
+    <item name="scale_factor" format="float" type="dimen">1.8</item>
 </resources>

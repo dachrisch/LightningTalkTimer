@@ -17,5 +17,4 @@
 <resources>
     <integer name="card_flip_time_full">300</integer>
     <integer name="card_flip_time_half">150</integer>
-    <fraction name="scale_factor">1.8</fraction>
 </resources>
